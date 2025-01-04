@@ -19,5 +19,8 @@
     "vue": "latest",
     "vue-router": "latest",
     "vuetify-nuxt-module": "^0.18.3"
+  },
+  "devDependencies": {
+    "sass-embedded": "^1.83.1"
   }
 }
