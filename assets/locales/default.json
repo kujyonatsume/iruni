@@ -1,0 +1,17 @@
+{
+    "title": "【魯尼按鈕】",
+    "description": "就只是個犬天使按鈕網站",
+    "keywords": "VTuber VoiceButton 祈iruni 魯尼",
+    "url": "https://iruni.natsumoe.com",
+    "social_image": "",
+    "index": "首頁",
+    "links": "友情鏈接",
+    "about": "關於",
+    "switch_dark_mode": "夜間模式開關",
+    "footer": {
+        "author": "夏目",
+        "author_link": "https://discordapp.com/users/386473957806833664",
+        "repo_link": "https://github.com/kujyonatsume/iruni",
+        "content": "本站為愛好者作品，和祈Iruni跟子午計畫沒有關聯，其餘資訊請查看\"關於\"頁面"
+    }
+}

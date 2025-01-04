@@ -1,0 +1,530 @@
+{
+  "groups": [
+    {
+      "group_name": "lyrics",
+      "group_description": "一般台詞",
+      "voice_list": [
+        {
+          "name": "嘿沒禮貌",
+          "path": "https://r2.natsumoe.com/iruni/voice/嘿沒禮貌.mp3",
+          "description": "嘿沒禮貌"
+        },
+        {
+          "name": "你敷衍我",
+          "path": "https://r2.natsumoe.com/iruni/voice/你敷衍我.mp3",
+          "description": "你敷衍我"
+        },
+        {
+          "name": "WDYM",
+          "path": "https://r2.natsumoe.com/iruni/voice/WDYM.mp3",
+          "description": "WDYM"
+        },
+        {
+          "name": "Yeah_you_die_I_die_go_die_die",
+          "path": "https://r2.natsumoe.com/iruni/voice/Yeah_you_die_I_die_go_die_die.mp3",
+          "description": "Yeah_you_die_I_die_go_die_die"
+        },
+        {
+          "name": "不要只會出一張嘴",
+          "path": "https://r2.natsumoe.com/iruni/voice/不要只會出一張嘴.mp3",
+          "description": "不要只會出一張嘴"
+        },
+        {
+          "name": "讓你模仿沒有讓你抄玥",
+          "path": "https://r2.natsumoe.com/iruni/voice/讓你模仿沒有讓你抄玥.mp3",
+          "description": "讓你模仿沒有讓你抄玥"
+        },
+        {
+          "name": "我是有禮貌的女人了",
+          "path": "https://r2.natsumoe.com/iruni/voice/我是有禮貌的女人了.mp3",
+          "description": "我是有禮貌的女人了"
+        },
+        {
+          "name": "我要炸掉子午計劃的廚房嘻嘻",
+          "path": "https://r2.natsumoe.com/iruni/voice/我要炸掉子午計劃的廚房嘻嘻.mp3",
+          "description": "我要炸掉子午計劃的廚房嘻嘻"
+        },
+        {
+          "name": "嘴巴張開~啊~~~",
+          "path": "https://r2.natsumoe.com/iruni/voice/嘴巴張開~啊~~~.mp3",
+          "description": "嘴巴張開~啊~~~"
+        },
+        {
+          "name": "我是天上的使者這隻惡魔就交由我來統治了",
+          "path": "https://r2.natsumoe.com/iruni/voice/我是天上的使者這隻惡魔就交由我來統治了.mp3",
+          "description": "我是天上的使者這隻惡魔就交由我來統治了"
+        },
+        {
+          "name": "晚安",
+          "path": "https://r2.natsumoe.com/iruni/voice/晚安.mp3",
+          "description": "晚安晚安晚安"
+        },
+        {
+          "name": "祈奶奶",
+          "path": "https://r2.natsumoe.com/iruni/voice/祈奶奶.mp3",
+          "description": "祈奶奶"
+        },
+        {
+          "name": "要蛋雕這遊戲",
+          "path": "https://r2.natsumoe.com/iruni/voice/要蛋雕這遊戲.mp3",
+          "description": "要蛋雕這遊戲"
+        },
+        {
+          "name": "要要當一輩子哈士奇一輩子",
+          "path": "https://r2.natsumoe.com/iruni/voice/要要當一輩子哈士奇一輩子.mp3",
+          "description": "要要當一輩子哈士奇一輩子"
+        },
+        {
+          "name": "嗚呼~我是最棒的!!",
+          "path": "https://r2.natsumoe.com/iruni/voice/嗚呼~我是最棒的!!.mp3",
+          "description": "嗚呼~我是最棒的!!"
+        },
+        {
+          "name": "好色喔",
+          "path": "https://r2.natsumoe.com/iruni/voice/好色喔.mp3",
+          "description": "好色喔"
+        },
+        {
+          "name": "你484喜歡我",
+          "path": "https://r2.natsumoe.com/iruni/voice/你484喜歡我.mp3",
+          "description": "你484喜歡我"
+        },
+        {
+          "name": "愛妻便當",
+          "path": "https://r2.natsumoe.com/iruni/voice/愛妻便當.mp3",
+          "description": "愛妻便當"
+        },
+        {
+          "name": "沒有要加班啦沒有",
+          "path": "https://r2.natsumoe.com/iruni/voice/沒有要加班啦沒有.mp3",
+          "description": "沒有要加班啦沒有"
+        },
+        {
+          "name": "你們清醒一點我拜託你們清醒一點好不好",
+          "path": "https://r2.natsumoe.com/iruni/voice/你們清醒一點我拜託你們清醒一點好不好.mp3",
+          "description": "你們清醒一點我拜託你們清醒一點好不好"
+        },
+        {
+          "name": "你們除了會讓我中風還會幹什麼",
+          "path": "https://r2.natsumoe.com/iruni/voice/你們除了會讓我中風還會幹什麼.mp3",
+          "description": "你們除了會讓我中風還會幹什麼"
+        },
+        {
+          "name": "わくわく",
+          "path": "https://r2.natsumoe.com/iruni/voice/わくわく.mp3",
+          "description": "わくわく"
+        },
+        {
+          "name": "起床重睡",
+          "path": "https://r2.natsumoe.com/iruni/voice/起床重睡.mp3",
+          "description": "起床重睡"
+        },
+        {
+          "name": "I will punish DD no DD",
+          "path": "https://r2.natsumoe.com/iruni/voice/I_will_punish_DD_no_DD.mp3",
+          "description": "I will punish DD no DD"
+        },
+        {
+          "name": "嘿我就偏不",
+          "path": "https://r2.natsumoe.com/iruni/voice/嘿我就偏不.mp3",
+          "description": "嘿我就偏不"
+        },
+        {
+          "name": "羞羞臉他不穿衣服餒阿北",
+          "path": "https://r2.natsumoe.com/iruni/voice/羞羞臉他不穿衣服餒阿北.mp3",
+          "description": "羞羞臉他不穿衣服餒阿北"
+        }
+      ]
+    },
+    {
+      "group_name": "healing_lyrics",
+      "group_description": "給你滿滿的能量",
+      "voice_list": [
+        {
+          "name": "我我昨天晚上親手做了愛妻便當你願意吃嗎",
+          "path": "https://r2.natsumoe.com/iruni/voice/我我昨天晚上親手做了愛妻便當你願意吃嗎.mp3",
+          "description": "我我昨天晚上親手做了愛妻便當你願意吃嗎"
+        },
+        {
+          "name": "要當大家的溫暖月光",
+          "path": "https://r2.natsumoe.com/iruni/voice/要當大家的溫暖月光.mp3",
+          "description": "要當大家的溫暖月光"
+        },
+        {
+          "name": "大家都是我的寶物你們都是我最重要的寶物",
+          "path": "https://r2.natsumoe.com/iruni/voice/大家都是我的寶物你們都是我最重要的寶物.mp3",
+          "description": "大家都是我的寶物你們都是我最重要的寶物"
+        },
+        {
+          "name": "你們也是我最重要的寶物你們的每一個留言然後然後對然後全部都是我的寶物對",
+          "path": "https://r2.natsumoe.com/iruni/voice/你們也是我最重要的寶物你們的每一個留言然後然後對然後全部都是我的寶物對.mp3",
+          "description": "你們也是我最重要的寶物你們的每一個留言然後然後對然後全部都是我的寶物對"
+        },
+        {
+          "name": "心靈治癒ProMaxPlus+",
+          "path": "https://r2.natsumoe.com/iruni/voice/心靈治癒ProMaxPlus+.mp3",
+          "description": "心靈治癒ProMaxPlus+"
+        }
+      ]
+    },
+    {
+      "group_name": "cry_lyrics",
+      "group_description": "台語台詞",
+      "voice_list": [
+        {
+          "name": "挖喜祈iruni",
+          "path": "https://r2.natsumoe.com/iruni/voice/挖喜祈iruni.mp3",
+          "description": "我是祈iruni"
+        },
+        {
+          "name": "假偷刀挖災亞蝦密喜偷刀假偷刀",
+          "path": "https://r2.natsumoe.com/iruni/voice/假偷刀挖災亞蝦密喜偷刀假偷刀.mp3",
+          "description": "假偷刀挖災亞蝦密喜偷刀假偷刀"
+        },
+        {
+          "name": "蛋雕蛋雕吝誒好啦沒有拉開玩笑的",
+          "path": "https://r2.natsumoe.com/iruni/voice/蛋雕蛋雕吝誒好啦沒有拉開玩笑的.mp3",
+          "description": "蛋雕蛋雕你們誒好啦沒有拉開玩笑的"
+        },
+        {
+          "name": "我的台語比你更好你知道嗎",
+          "path": "https://r2.natsumoe.com/iruni/voice/挖誒台益逼哩喀厚哩災亞某.mp3",
+          "description": "我的台語比你更好你知道嗎"
+        },
+        {
+          "name": "我像妳去死啦",
+          "path": "https://r2.natsumoe.com/iruni/voice/我像妳去死啦.mp3",
+          "description": "我像妳去死啦"
+        },
+        {
+          "name": "說話該小聲的是誰",
+          "path": "https://r2.natsumoe.com/iruni/voice/說話該小聲的是誰.mp3",
+          "description": "說話該小聲的是誰"
+        }
+      ]
+    },
+    {
+      "group_name": "cry_lyrics",
+      "group_description": "哀號類台詞",
+      "voice_list": [
+        {
+          "name": "嗚嗚嗚我被敷衍了",
+          "path": "https://r2.natsumoe.com/iruni/voice/嗚嗚嗚我被敷衍了.mp3",
+          "description": "嗚嗚嗚我被敷衍了"
+        },
+        {
+          "name": "媽媽~~",
+          "path": "https://r2.natsumoe.com/iruni/voice/媽媽~~.mp3",
+          "description": "媽媽~~"
+        },
+        {
+          "name": "跳舞派對",
+          "path": "https://r2.natsumoe.com/iruni/voice/跳舞派對.mp3",
+          "description": "跳舞派對"
+        },
+        {
+          "name": "魯尼哭哭",
+          "path": "https://r2.natsumoe.com/iruni/voice/魯尼哭哭.mp3",
+          "description": "魯尼哭哭"
+        },
+        {
+          "name": "是強哥~~~~~",
+          "path": "https://r2.natsumoe.com/iruni/voice/是強哥~~~~~.mp3",
+          "description": "是強哥~~~~~"
+        },
+        {
+          "name": "你們都騙我的小珍珠",
+          "path": "https://r2.natsumoe.com/iruni/voice/你們都騙我的小珍珠.mp3",
+          "description": "你們都騙我的小珍珠"
+        }
+      ]
+    },
+    {
+      "group_name": "curse_lyrics",
+      "group_description": "罵倒類台詞",
+      "voice_list": [
+        {
+          "name": "我不是你媽！亂認",
+          "path": "https://r2.natsumoe.com/iruni/voice/我不是你媽！亂認.mp3",
+          "description": "我不是你媽！亂認"
+        },
+        {
+          "name": "你到底想怎樣啦",
+          "path": "https://r2.natsumoe.com/iruni/voice/你到底想怎樣啦.mp3",
+          "description": "你到底想怎樣啦"
+        },
+        {
+          "name": "你這個爛砲兵",
+          "path": "https://r2.natsumoe.com/iruni/voice/你這個爛砲兵.mp3",
+          "description": "你這個爛砲兵"
+        },
+        {
+          "name": "哦~你好糟糕喔",
+          "path": "https://r2.natsumoe.com/iruni/voice/哦~你好糟糕喔.mp3",
+          "description": "哦~你好糟糕喔"
+        },
+        {
+          "name": "我是你媽去吃便當",
+          "path": "https://r2.natsumoe.com/iruni/voice/我是你媽去吃便當.mp3",
+          "description": "我是你媽去吃便當"
+        },
+        {
+          "name": "你們真是沒用",
+          "path": "https://r2.natsumoe.com/iruni/voice/你們真是沒用.mp3",
+          "description": "你們哈士奇真是沒用"
+        }
+      ]
+    },
+    {
+      "group_name": "yandere_lyrics",
+      "group_description": "病嬌類台詞",
+      "voice_list": [
+        {
+          "name": "要一直在一起",
+          "path": "https://r2.natsumoe.com/iruni/voice/要一直在一起.mp3",
+          "description": "要一直在一起"
+        },
+        {
+          "name": "如果你們發了任何dd的東西我都看的到喔",
+          "path": "https://r2.natsumoe.com/iruni/voice/如果你們發了任何dd的東西我都看的到喔.mp3",
+          "description": "如果你們發了任何dd的東西我都看的到喔"
+        },
+        {
+          "name": "陳樂童李若男",
+          "path": "https://r2.natsumoe.com/iruni/voice/陳樂童李若男.mp3",
+          "description": "陳樂童李若男"
+        },
+        {
+          "name": "新婚三問_病嬌版",
+          "path": "https://r2.natsumoe.com/iruni/voice/新婚三問_病嬌版.mp3",
+          "description": "新婚三問(病嬌)"
+        }
+      ]
+    },
+    {
+      "group_name": "headphone_recommand",
+      "group_description": "耳機推薦 (ASMR 立體聲可能導致社死的語音)",
+      "voice_list": [
+        {
+          "name": "今天有想我嗎有想我嗎我超想你們的",
+          "path": "https://r2.natsumoe.com/iruni/voice/今天有想我嗎有想我嗎我超想你們的.mp3",
+          "description": "今天有想我嗎有想我嗎我超想你們的"
+        },
+        {
+          "name": "TSKR",
+          "path": "https://r2.natsumoe.com/iruni/voice/TSKR.mp3",
+          "description": "打噴嚏TSKR"
+        },
+        {
+          "name": "我們結束了(哈欠)",
+          "path": "https://r2.natsumoe.com/iruni/voice/我們結束了(哈欠).mp3",
+          "description": "我們結束了(哈欠)"
+        },
+        {
+          "name": "要哄睡狗狗哈士奇睡覺嘍",
+          "path": "https://r2.natsumoe.com/iruni/voice/要哄睡狗狗哈士奇睡覺嘍.mp3",
+          "description": "要哄睡狗狗哈士奇睡覺嘍"
+        },
+        {
+          "name": "起床了",
+          "path": "https://r2.natsumoe.com/iruni/voice/起床了.mp3",
+          "description": "起床了"
+        },
+        {
+          "name": "說謊的人去吃便當",
+          "path": "https://r2.natsumoe.com/iruni/voice/說謊的人去吃便當.mp3",
+          "description": "說謊的人(小聲)..去吃便當"
+        },
+        {
+          "name": "魯尼喜歡我",
+          "path": "https://r2.natsumoe.com/iruni/voice/魯尼喜歡我.mp3",
+          "description": "好き好きみんな大好き大好きだよ大好きだよみんな大好き"
+        },
+        {
+          "name": "新婚三問ASMR",
+          "path": "https://r2.natsumoe.com/iruni/voice/新婚三問ASMR.mp3",
+          "description": "新婚三問ASMR版"
+        },
+        {
+          "name": "新婚三問",
+          "path": "https://r2.natsumoe.com/iruni/voice/新婚三問.mp3",
+          "description": "新婚三問"
+        },
+        {
+          "name": "穿辣一點喔",
+          "path": "https://r2.natsumoe.com/iruni/voice/穿辣一點喔.mp3",
+          "description": "穿辣一點喔"
+        },
+        {
+          "name": "5ma",
+          "path": "https://r2.natsumoe.com/iruni/voice/5ma.mp3",
+          "description": "5ma"
+        },
+        {
+          "name": "老公起床嘍",
+          "path": "https://r2.natsumoe.com/iruni/voice/老公起床嘍.mp3",
+          "description": "老公起床嘍"
+        },
+        {
+          "name": "好啦最喜歡妳了",
+          "path": "https://r2.natsumoe.com/iruni/voice/好啦最喜歡妳了.mp3",
+          "description": "好啦最喜歡妳了"
+        },
+        {
+          "name": "妹控語音",
+          "path": "https://r2.natsumoe.com/iruni/voice/妹控.mp3",
+          "description": "おにいちゃん おにいちゃん ルニのことすき ルニわね おにいちゃんのこと大好きだ ちゅー"
+        }
+      ]
+    },
+    {
+      "group_name": "ACG_lyrics",
+      "group_description": "老二次元了",
+      "voice_list": [
+        {
+          "name": "什…什麼…你什麼時候產生這種錯覺",
+          "path": "https://r2.natsumoe.com/iruni/voice/什…什麼…你什麼時候產生這種錯覺.mp3",
+          "description": "什…什麼…你什麼時候產生這種錯覺"
+        },
+        {
+          "name": "Explosion",
+          "path": "https://r2.natsumoe.com/iruni/voice/Explosion.mp3",
+          "description": "Explosion"
+        },
+        {
+          "name": "咕嚕靈波",
+          "path": "https://r2.natsumoe.com/iruni/voice/咕嚕靈波.mp3",
+          "description": "咕嚕靈波"
+        },
+        {
+          "name": "什麼是歡愉我就是歡愉",
+          "path": "https://r2.natsumoe.com/iruni/voice/什麼是歡愉我就是歡愉.mp3",
+          "description": "什麼是歡愉我就是歡愉"
+        },
+        {
+          "name": "爆裂魔法",
+          "path": "https://r2.natsumoe.com/iruni/voice/爆裂魔法.mp3",
+          "description": "爆裂魔法"
+        },
+        {
+          "name": "自肥魔女伊雷娜",
+          "path": "自肥魔女伊雷娜.mp3",
+          "description": "自肥魔女伊雷娜"
+        },
+        {
+          "name": "鹿乃子",
+          "path": "https://r2.natsumoe.com/iruni/voice/鹿乃子.mp3",
+          "description": "鹿乃子"
+        }
+      ]
+    },
+    {
+      "group_name": "mygo",
+      "group_description": "MyGo",
+      "voice_list": [
+        {
+          "name": "你們這些哈士奇老是只想到自己呢",
+          "path": "https://r2.natsumoe.com/iruni/voice/你們這些哈士奇老是只想到自己呢.mp3",
+          "description": "你們這些哈士奇老是只想到自己呢"
+        }
+      ]
+    },
+    {
+      "group_name": "noise",
+      "group_description": "意義不明的音效",
+      "voice_list": [
+        {
+          "name": "咕嚕咕嚕",
+          "path": "https://r2.natsumoe.com/iruni/voice/咕嚕咕嚕.mp3",
+          "description": "咕嚕咕嚕"
+        },
+        {
+          "name": "鈴鈴鈴鈴鈴鈴",
+          "path": "https://r2.natsumoe.com/iruni/voice/鈴鈴鈴鈴鈴鈴.mp3",
+          "description": "鈴鈴鈴鈴鈴鈴"
+        },
+        {
+          "name": "阿巴阿巴阿巴",
+          "path": "https://r2.natsumoe.com/iruni/voice/阿巴阿巴阿巴.mp3",
+          "description": "阿巴阿巴阿巴"
+        },
+        {
+          "name": "YAHAHAA",
+          "path": "https://r2.natsumoe.com/iruni/voice/YAHAHAA.mp3",
+          "description": "YAHAHAA"
+        },
+        {
+          "name": "weeeeee",
+          "path": "https://r2.natsumoe.com/iruni/voice/weeeeee.mp3",
+          "description": "weeeeee"
+        },
+        {
+          "name": "惡龍咆哮",
+          "path": "https://r2.natsumoe.com/iruni/voice/惡龍咆哮.mp3",
+          "description": "惡龍咆哮"
+        },
+        {
+          "name": "Padoru",
+          "path": "https://r2.natsumoe.com/iruni/voice/Padoru.mp3",
+          "description": "Padoru"
+        },
+        {
+          "name": "叭餔",
+          "path": "https://r2.natsumoe.com/iruni/voice/叭餔.mp3",
+          "description": "叭餔"
+        },
+        {
+          "name": "啾亨",
+          "path": "https://r2.natsumoe.com/iruni/voice/可愛.mp3",
+          "description": "啾亨"
+        },
+        {
+          "name": "哼",
+          "path": "https://r2.natsumoe.com/iruni/voice/哼.mp3",
+          "description": "哼"
+        },
+        {
+          "name": "卡哇伊",
+          "path": "https://r2.natsumoe.com/iruni/voice/卡哇伊.mp3",
+          "description": "卡哇伊"
+        },
+        {
+          "name": "嗚呼",
+          "path": "https://r2.natsumoe.com/iruni/voice/嗚呼.mp3",
+          "description": "嗚呼"
+        },
+        {
+          "name": "嗷嗷",
+          "path": "https://r2.natsumoe.com/iruni/voice/嗷嗷.mp3",
+          "description": "嗷嗷"
+        },
+        {
+          "name": "嗷嗷2",
+          "path": "https://r2.natsumoe.com/iruni/voice/嗷嗷2.mp3",
+          "description": "嗷嗷2"
+        },
+        {
+          "name": "嗷嗷3",
+          "path": "https://r2.natsumoe.com/iruni/voice/嗷嗷3.mp3",
+          "description": "嗷嗷3"
+        }
+      ]
+    },
+    {
+      "group_name": "song_lyrics",
+      "group_description": "歌曲台詞",
+      "voice_list": [
+        {
+          "name": "呀咧呀咧",
+          "path": "https://r2.natsumoe.com/iruni/voice/呀咧呀咧.mp3",
+          "description": "呀咧呀咧"
+        },
+        {
+          "name": "5MA之歌",
+          "path": "https://r2.natsumoe.com/iruni/voice/魯尼5MA.mp3",
+          "description": "5MA之歌"
+        }
+      ]
+    }
+  ]
+}
