@@ -3,9 +3,11 @@ tag.src = "https://www.youtube.com/iframe_api";
 firstScriptTag = document.getElementsByTagName("script")[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 onYouTubeIframeAPIReady()
-function onYouTubeIframeAPIReady() {
+
+async function onYouTubeIframeAPIReady() {
+    var { videoId } = await ((await fetch("./api/getLastVideoId")).json())
     new YT.Player("ytplayer", {
-        videoId: "oNODJP2vQTU",
+        videoId,
         events: {
             onReady(event) {
                 event.target.playVideo();
