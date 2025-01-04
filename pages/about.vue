@@ -1,14 +1,19 @@
+<script setup>
+import site from '~/assets/locales/default.json';
+useHead({ title: site.title })
+const title = useTitle()
+title.set("關於")
+</script>
+
 <template>
   <v-layout style="display: flex; justify-content: center;">
     <v-card class="readme-card">
       <v-card-text>
-        <ContentDoc class="markdown-body" path="/about" />
+        <ContentDoc class="markdown-body" path="/about" :head="false" />
       </v-card-text>
     </v-card>
   </v-layout>
 </template>
-<script setup>
-</script>
 <style lang="css">
 .readme-card {
   margin-bottom: 16px;

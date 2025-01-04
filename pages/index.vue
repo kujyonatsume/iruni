@@ -1,5 +1,6 @@
 <script setup>
-
+const title = useTitle()
+title.set("首頁")
 onMounted(init)
 
 function init() {

@@ -37,11 +37,12 @@ export default defineNuxtConfig({
                 },
                 { hid: 'og:image', property: 'og:image', content: site.social_image },
                 { name: 'twitter:card', content: 'summary_large_image' },
-                { name: 'twitter:site', content: '@_natsume0304' }
+                { name: 'twitter:site', content: '@_natsume0304' },
+                { name: "theme-color", content: site.color }
             ],
             link: [
-                { rel: 'icon', type: 'image/png', href: '/icon.png' },
-                { rel: 'shortcut icon', type: 'image/png', href: '/icon.png' }
+                { rel: 'icon', type: 'image/png', href: site.icon },
+                { rel: 'shortcut icon', type: 'image/png', href: site.icon }
             ]
         },
     },

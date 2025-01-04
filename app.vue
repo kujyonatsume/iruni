@@ -1,42 +1,33 @@
 <script setup>
 import site from '~/assets/locales/default.json';
-import {
-  mdiApps,
-  mdiCodeTags,
-  mdiBrightness2,
-  mdiTranslate,
-  mdiGithub,
-  mdiNewspaper,
-  mdiAlphaBBox,
-  mdiPlaylistStar,
-  mdiCommentAccountOutline
-} from '@mdi/js'
+import * as icon from '@mdi/js'
 
-
-
-const store = useDark()
+const dark = useDark()
 const theme = useTheme();
 const drawer = ref(false)
+
 const icons = {
-  apps: mdiApps,
-  code_tags: mdiCodeTags,
-  brightness: mdiBrightness2,
-  translate: mdiTranslate,
-  github: mdiGithub,
-  newspaper: mdiNewspaper,
-  alpha_b_box: mdiAlphaBBox,
-  play_list_star: mdiPlaylistStar,
-  account: mdiCommentAccountOutline
+  apps: icon.mdiApps,
+  code_tags: icon.mdiCodeTags,
+  brightness: icon.mdiBrightness2,
+  translate: icon.mdiTranslate,
+  github: icon.mdiGithub,
+  newspaper: icon.mdiNewspaper,
+  alpha_b_box: icon.mdiAlphaBBox,
+  play_list_star: icon.mdiPlaylistStar,
+  account: icon.mdiCommentAccountOutline,
+  music: icon.mdiMusicBoxMultipleOutline
 }
 
 const changeMode = () => {
-  store.change()
-  theme.global.name.value = store.dark ? 'dark' : 'light'
+  dark.change()
+  theme.global.name.value = dark.data ? 'dark' : 'light'
 }
+const title = useTitle()
 
 const pages = [
-  { icon: icons.apps, title: site.index, to: "/" },
-  { icon: icons.apps, title: "音效按鈕", to: "/button" },
+  { icon: icons.apps, title: "首頁", to: "/" },
+  { icon: icons.music, title: "音效按鈕", to: "/button" },
 ]
 
 const links = [
@@ -58,22 +49,23 @@ const links = [
           <v-list-item-title>{{ item.title }}</v-list-item-title>
         </v-list-item>
         <v-divider />
-        <v-list-item v-for="(item, i) in links" :key="i + pages.length" :href="item.to" target="_blank" rel="noreferrer">
+        <v-list-item v-for="(item, i) in links" :key="i + pages.length" :href="item.to" target="_blank"
+          rel="noreferrer">
           <v-list-item-action> <v-img :src="item.icon" style="width: 24px;" /> </v-list-item-action>
           <v-list-item-title>{{ item.title }}</v-list-item-title>
         </v-list-item>
         <v-divider />
-        <v-list-item dense to="/about" router :exact="true">
+        <v-list-item dense to="/about" :exact="true">
           <v-list-item-action> <v-icon>{{ icons.code_tags }}</v-icon> </v-list-item-action>
-          <v-list-item-title>{{ site.about }}</v-list-item-title>
+          <v-list-item-title>關於</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
 
     <v-app-bar class="bg-primary text-white">
       <v-app-bar-nav-icon class="text-white" @click="drawer = !drawer" />
-      <v-toolbar-title style="flex:none">{{ site.title }}</v-toolbar-title>
-      <v-img src="./public/icon.png" style="max-width: 24px; margin-left: 6px;" />
+      <v-toolbar-title style="flex:none">{{ title.data }}</v-toolbar-title>
+      <v-img :src="site.icon" style="max-width: 24px; margin-left: 6px;" />
       <v-spacer />
       <v-tooltip>
         <template v-slot:activator="{ on }">
@@ -93,12 +85,10 @@ const links = [
       <v-footer class="footer">
         <div>
           <div style="vertical-align: middle;">
-            <span>&copy; {{ new Date().getFullYear() }} </span>
-            <span>
-              <a :href="site.footer.author_link" target="_blank" rel="noreferrer">
+            <p>&copy; {{ new Date().getFullYear() }} <a :href="site.footer.author_link" target="_blank" rel="noreferrer">
                 {{ site.footer.author }}
               </a>
-            </span>
+            </p>
             <v-btn v-if="site.footer.repo_link === 'no_display'" icon :href="site.footer.repo_link" target="_blank"
               style="vertical-align: middle;" rel="noreferrer">
               <v-icon>{{ icons.github }}</v-icon>

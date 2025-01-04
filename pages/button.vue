@@ -36,16 +36,19 @@ const control = {
   full_name: "魯尼",
   overlap_title: "魯尼"
 }
-const store = useDark()
+const title = useTitle()
+title.set("音效按鈕")
+
+const dark = useDark()
 const childRef = ref([]);
 const nowPlaying = reactive(new Set())
 const overlap = ref(false);
 const random = ref(false);
 const repeat = ref(false);
 
-const fabIcon = computed(() => [store.dark ? 'text-white-darken-1' : 'text-blue']);
-const fabColor = computed(() => [store.dark ? 'bg-indigo-darken-1' : 'bg-white-lighten-2'])
-const speedDial = computed(() => [store.dark ? 'bg-cyan-darken-1' : 'bg-cyan-lighten-2'])
+const fabIcon = computed(() => [dark.data ? 'text-white-darken-1' : 'text-blue']);
+const fabColor = computed(() => [dark.data ? 'bg-indigo-darken-1' : 'bg-white-lighten-2'])
+const speedDial = computed(() => [dark.data ? 'bg-cyan-darken-1' : 'bg-cyan-lighten-2'])
 const overlapText = computed(() => `${control.overlap} ${overlap.value ? control.enabled : control.disabled}`);
 const randomText = computed(() => `${control.random} ${random.value ? control.enabled : control.disabled}`);
 const repeatText = computed(() => `${control.repeat} ${repeat.value ? control.enabled : control.disabled}`);

@@ -1,12 +1,11 @@
 {
-    "title": "【魯尼按鈕】",
-    "description": "就只是個犬天使按鈕網站",
-    "keywords": "VTuber VoiceButton 祈iruni 魯尼",
+    "icon": "/icon.png",
+    "title": "祈Iruni粉絲網站",
+    "description": "我最愛的藍色柯基天使",
+    "keywords": "VTuber VoiceButton YoutubePlayer 祈iruni 魯尼 粉絲網站",
+    "color": "#0C1C49",
     "url": "https://iruni.natsumoe.com",
     "social_image": "",
-    "index": "首頁",
-    "links": "友情鏈接",
-    "about": "關於",
     "switch_dark_mode": "夜間模式開關",
     "footer": {
         "author": "夏目",
