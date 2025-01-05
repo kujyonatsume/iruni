@@ -2,21 +2,21 @@
 const title = useTitle()
 title.set("首頁")
 
-onMounted(async () => {
+onMounted(showStream)
 
-
+async function showStream() {
   var { channel, id, upcoming } = (await $fetch("/api/stream"))
   console.log(channel, id, upcoming);
-  
+
   var apiPlayer = document.getElementById('api-player')
-  apiPlayer.innerText = ""
   if (channel) {
     apiPlayer.innerHTML = `<iframe src="https://player.twitch.tv/?channel=${channel}&parent=${location.host}&muted=false" allowfullscreen></iframe>`
-  } else {
+  } else if (id) {
     apiPlayer.innerHTML = `<iframe src="https://www.youtube.com/embed/${id}?autoplay=1&origin=${location.origin}" frameborder="0"></iframe>`
+  } else {
+    setTimeout(showStream, 600000)
   }
-
-})
+}
 
 </script>
 
@@ -27,10 +27,11 @@ onMounted(async () => {
 </template>
 
 <style>
-#api-player > iframe {
+#api-player>iframe {
   height: min(calc(70vw / 16 * 9), 70vh);
   width: min(calc(70vh / 9 * 16), 70vw);
 }
+
 #videobox {
   display: flex !important;
   flex-direction: column;

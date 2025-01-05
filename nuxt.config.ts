@@ -7,9 +7,6 @@ export default defineNuxtConfig({
         host: "localhost",
         port: 3000
     },
-    nitro: {
-        preset: 'cloudflare' // 預設為 node-server
-    },
     css: ['@/assets/style.scss'],
     modules: [
         'vuetify-nuxt-module',
