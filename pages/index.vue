@@ -1,18 +1,21 @@
 <script setup>
 const title = useTitle()
-title.set("首頁")
+title.set("歌單播放器")
+onMounted(init)
 
-useHead({
-  script: [{ src: "/js/showstream.js" }]
-})
-
-
+function init() {
+  let script = document.createElement("script");
+  script.src = "/js/player.js";
+  document.getElementById("videobox").appendChild(script)
+}
 
 </script>
 
 <template>
   <v-layout id="videobox">
-    <div id="api-player">魯尼沒有直播也沒有開待機台</div>
+    <div id="ytplayer"></div>
+    <br>
+    <div class="bg"></div>
   </v-layout>
 </template>
 
