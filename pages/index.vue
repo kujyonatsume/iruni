@@ -1,53 +1,35 @@
 <script setup>
 const title = useTitle()
-title.set("歌單播放器")
-onMounted(init)
+title.set("首頁")
 
-function init() {
-  let script = document.createElement("script");
-  script.src = "/js/player.js";
-  document.getElementById("videobox").appendChild(script)
+onMounted(showStream)
+
+async function showStream() {
+  var { channel, id, upcoming } = (await $fetch("https://api.kujyonatsume.workers.dev/iruni/stream"))
+  console.log(channel, id, upcoming);
+
+  var apiPlayer = document.getElementById('api-player')
+  if (channel) {
+    apiPlayer.innerHTML = `<iframe src="https://player.twitch.tv/?channel=${channel}&parent=${location.host}&muted=false" allowfullscreen></iframe>`
+  } else if (id) {
+    apiPlayer.innerHTML = `<iframe src="https://www.youtube.com/embed/${id}?autoplay=1&origin=${location.origin}" frameborder="0"></iframe>`
+  } else {
+    setTimeout(showStream, 600000)
+  }
 }
 
 </script>
 
 <template>
   <v-layout id="videobox">
-    <div id="ytplayer"></div>
-    <br>
-    <div class="bg"></div>
+    <div id="api-player">魯尼沒有直播也沒有開待機台</div>
   </v-layout>
 </template>
 
 <style>
-.bg {
-  width: 100%;
-  height: 150px;
-  margin: 15px auto;
-  color: darkgrey;
-  font-size: 14px;
-  overflow: hidden;
-  position: relative;
-}
-
-.bg ul {
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  list-style: none;
-}
-
-.bg ul li {
-  width: 100%;
-  height: 30px;
-  line-height: 30px;
-  text-align: center;
-}
-
-.bg ul li.active {
-  color: black;
-  font-size: 15px;
+#api-player>iframe {
+  height: min(calc(70vw / 16 * 9), 70vh);
+  width: min(calc(70vh / 9 * 16), 70vw);
 }
 
 #videobox {
