@@ -1,55 +1,32 @@
 <script setup>
 const title = useTitle()
-title.set("歌單播放器")
-onMounted(init)
+title.set("首頁")
 
-function init() {
-  let script = document.createElement("script");
-  script.src = "/js/player.js";
-  document.getElementById("videobox").appendChild(script)
-}
+onMounted(async () => {
+
+
+  var { channel, id, upcoming } = (await $fetch("/api/stream"))
+  console.log(channel, id, upcoming);
+  
+  var apiPlayer = document.getElementById('api-player')
+  apiPlayer.innerText = ""
+  if (channel) {
+    apiPlayer.innerHTML = `<iframe height="720" width="1280" src="https://player.twitch.tv/?channel=${channel}&parent=${location.host}&muted=false" allowfullscreen></iframe>`
+  } else {
+    apiPlayer.innerHTML = `<iframe height="720" width="1280" src="https://www.youtube.com/embed/${id}?autoplay=1&origin=${location.origin}" frameborder="0"></iframe>`
+  }
+
+})
 
 </script>
 
 <template>
   <v-layout id="videobox">
-    <div id="ytplayer"></div>
-    <br>
-    <div class="bg"></div>
+    <div id="api-player">魯尼沒有直播也沒有開待機台</div>
   </v-layout>
 </template>
 
 <style>
-.bg {
-  width: 100%;
-  height: 150px;
-  margin: 15px auto;
-  color: darkgrey;
-  font-size: 14px;
-  overflow: hidden;
-  position: relative;
-}
-
-.bg ul {
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  list-style: none;
-}
-
-.bg ul li {
-  width: 100%;
-  height: 30px;
-  line-height: 30px;
-  text-align: center;
-}
-
-.bg ul li.active {
-  color: black;
-  font-size: 15px;
-}
-
 #videobox {
   display: flex !important;
   flex-direction: column;

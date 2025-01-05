@@ -3,6 +3,13 @@ import colors from 'vuetify/lib/util/colors.mjs'
 export default defineNuxtConfig({
     compatibilityDate: '2024-11-01',
     devtools: { enabled: true },
+    devServer: {
+        host: "localhost",
+        port: 3000
+    },
+    nitro: {
+        preset: 'cloudflare' // 預設為 node-server
+    },
     css: ['@/assets/style.scss'],
     modules: [
         'vuetify-nuxt-module',
