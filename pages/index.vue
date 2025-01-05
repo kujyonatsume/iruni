@@ -2,20 +2,8 @@
 const title = useTitle()
 title.set("首頁")
 
-onMounted(async () => {
-
-
-  var { channel, id, upcoming } = (await $fetch("/api/stream"))
-  console.log(channel, id, upcoming);
-  
-  var apiPlayer = document.getElementById('api-player')
-  apiPlayer.innerText = ""
-  if (channel) {
-    apiPlayer.innerHTML = `<iframe height="720" width="1280" src="https://player.twitch.tv/?channel=${channel}&parent=${location.host}&muted=false" allowfullscreen></iframe>`
-  } else {
-    apiPlayer.innerHTML = `<iframe height="720" width="1280" src="https://www.youtube.com/embed/${id}?autoplay=1&origin=${location.origin}" frameborder="0"></iframe>`
-  }
-
+useHead({
+  script: [{ src: "/js/showstream.js" }]
 })
 
 </script>
