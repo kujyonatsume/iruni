@@ -21,7 +21,7 @@ const title = useTitle()
 
 const pages = [
   { icon: apps, title: "首頁", to: "/" },
-  { icon: playlist, title: "音樂播放器", to: "/player" },
+  { icon: playlist, title: "歌曲清單", to: "/playlist" },
   { icon: playBox, title: "音效按鈕", to: "/button" },
 ]
 
