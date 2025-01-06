@@ -5,7 +5,7 @@ title.set("首頁")
 onMounted(showStream)
 
 async function showStream() {
-  var { channel, id, upcoming } = (await $fetch("https://api.kujyonatsume.workers.dev/iruni/stream"))
+  var { channel, id, upcoming } = (await $fetch("https://api.natsumoe.com/iruni/stream"))
   console.log(channel, id, upcoming);
 
   var apiPlayer = document.getElementById('api-player')
