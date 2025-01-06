@@ -1,14 +1,26 @@
 <script setup>
 import voiceLists from '~/assets/voices.json';
 import {
-  mdiClose as close,
-  mdiPlay as play,
-  mdiStop as stop,
-  mdiSelectionEllipseArrowInside as selectionEllipseArrowInside,
-  mdiViewParallel as viewParallel,
-  mdiRepeat as repeat,
-  mdiShuffle as shuffle,
+  mdiClockOutline,
+  mdiClose,
+  mdiPlay,
+  mdiRepeat,
+  mdiSelectionEllipseArrowInside,
+  mdiShuffle,
+  mdiStop,
+  mdiViewParallel,
 } from '@mdi/js';
+
+const icons = {
+  close: mdiClose,
+  play: mdiPlay,
+  stop: mdiStop,
+  selectionEllipseArrowInside: mdiSelectionEllipseArrowInside,
+  viewParallel: mdiViewParallel,
+  repeat: mdiRepeat,
+  shuffle: mdiShuffle,
+  clockOutline: mdiClockOutline,
+};
 
 const fab = ref(false);
 
@@ -129,7 +141,7 @@ function stopAll() {
       <template v-slot:activator="{ props }">
         <v-btn class="float-tool text-white" v-bind="props" :class="speedDial">
           <v-icon :size="24">
-            {{ fab ? close : play }}
+            {{ fab ? icons.close : icons.play }}
           </v-icon>
         </v-btn>
       </template>
@@ -137,13 +149,13 @@ function stopAll() {
       <v-btn class="btn-fab" :class="fabColor" @click="stopAll">
         <span class="fab-tip">{{ control.stop }}</span>
         <v-icon :class="fabIcon">
-          {{ stop }}
+          {{ icons.stop }}
         </v-icon>
       </v-btn>
       <v-btn class="btn-fab" :class="fabColor" @click="playRandomVoice">
         <span class="fab-tip">{{ control.pick_one }}</span>
         <v-icon :class="fabIcon">
-          {{ selectionEllipseArrowInside }}
+          {{ icons.selectionEllipseArrowInside }}
         </v-icon>
       </v-btn>
       <v-btn class="btn-fab" :class="fabColor" :disabled="random" @click="() => overlap = !overlap">
@@ -151,7 +163,7 @@ function stopAll() {
           {{ overlapText }}
         </span>
         <v-icon :class="fabIcon">
-          {{ viewParallel }}
+          {{ icons.viewParallel }}
         </v-icon>
       </v-btn>
       <v-btn class="btn-fab" :class="fabColor" :disabled="random" @click="() => repeat = !repeat">
@@ -159,7 +171,7 @@ function stopAll() {
           {{ repeatText }}
         </span>
         <v-icon :class="fabIcon">
-          {{ repeat }}
+          {{ icons.repeat }}
         </v-icon>
       </v-btn>
       <v-btn class="btn-fab" v-model="fab" :class="fabColor" :disabled="overlap || repeat"
@@ -168,7 +180,7 @@ function stopAll() {
           {{ randomText }}
         </span>
         <v-icon :class="fabIcon">
-          {{ shuffle }}
+          {{ icons.shuffle }}
         </v-icon>
       </v-btn>
     </v-speed-dial>
