@@ -1,9 +1,9 @@
 {
   "groups": [
     {
-      "group_name": "lyrics",
-      "group_description": "一般台詞",
-      "voice_list": [
+      "name": "lyrics",
+      "description": "一般台詞",
+      "voices": [
         {
           "name": "嘿沒禮貌",
           "path": "https://r2.natsumoe.com/iruni/voice/嘿沒禮貌.mp3",
@@ -137,9 +137,9 @@
       ]
     },
     {
-      "group_name": "healing_lyrics",
-      "group_description": "給你滿滿的能量",
-      "voice_list": [
+      "name": "healing_lyrics",
+      "description": "給你滿滿的能量",
+      "voices": [
         {
           "name": "我我昨天晚上親手做了愛妻便當你願意吃嗎",
           "path": "https://r2.natsumoe.com/iruni/voice/我我昨天晚上親手做了愛妻便當你願意吃嗎.mp3",
@@ -168,9 +168,9 @@
       ]
     },
     {
-      "group_name": "cry_lyrics",
-      "group_description": "台語台詞",
-      "voice_list": [
+      "name": "cry_lyrics",
+      "description": "台語台詞",
+      "voice": [
         {
           "name": "挖喜祈iruni",
           "path": "https://r2.natsumoe.com/iruni/voice/挖喜祈iruni.mp3",
@@ -204,9 +204,9 @@
       ]
     },
     {
-      "group_name": "cry_lyrics",
-      "group_description": "哀號類台詞",
-      "voice_list": [
+      "name": "cry_lyrics",
+      "description": "哀號類台詞",
+      "voices": [
         {
           "name": "嗚嗚嗚我被敷衍了",
           "path": "https://r2.natsumoe.com/iruni/voice/嗚嗚嗚我被敷衍了.mp3",
@@ -240,9 +240,9 @@
       ]
     },
     {
-      "group_name": "curse_lyrics",
-      "group_description": "罵倒類台詞",
-      "voice_list": [
+      "name": "curse_lyrics",
+      "description": "罵倒類台詞",
+      "voices": [
         {
           "name": "我不是你媽！亂認",
           "path": "https://r2.natsumoe.com/iruni/voice/我不是你媽！亂認.mp3",
@@ -276,9 +276,9 @@
       ]
     },
     {
-      "group_name": "yandere_lyrics",
-      "group_description": "病嬌類台詞",
-      "voice_list": [
+      "name": "yandere_lyrics",
+      "description": "病嬌類台詞",
+      "voices": [
         {
           "name": "要一直在一起",
           "path": "https://r2.natsumoe.com/iruni/voice/要一直在一起.mp3",
@@ -302,9 +302,9 @@
       ]
     },
     {
-      "group_name": "headphone_recommand",
-      "group_description": "耳機推薦 (ASMR 立體聲可能導致社死的語音)",
-      "voice_list": [
+      "name": "headphone_recommand",
+      "description": "耳機推薦 (ASMR 立體聲可能導致社死的語音)",
+      "voices": [
         {
           "name": "今天有想我嗎有想我嗎我超想你們的",
           "path": "https://r2.natsumoe.com/iruni/voice/今天有想我嗎有想我嗎我超想你們的.mp3",
@@ -378,9 +378,9 @@
       ]
     },
     {
-      "group_name": "ACG_lyrics",
-      "group_description": "老二次元了",
-      "voice_list": [
+      "name": "ACG_lyrics",
+      "description": "老二次元了",
+      "voices": [
         {
           "name": "什…什麼…你什麼時候產生這種錯覺",
           "path": "https://r2.natsumoe.com/iruni/voice/什…什麼…你什麼時候產生這種錯覺.mp3",
@@ -419,9 +419,9 @@
       ]
     },
     {
-      "group_name": "mygo",
-      "group_description": "MyGo",
-      "voice_list": [
+      "name": "mygo",
+      "description": "MyGo",
+      "voices": [
         {
           "name": "你們這些哈士奇老是只想到自己呢",
           "path": "https://r2.natsumoe.com/iruni/voice/你們這些哈士奇老是只想到自己呢.mp3",
@@ -430,9 +430,9 @@
       ]
     },
     {
-      "group_name": "noise",
-      "group_description": "意義不明的音效",
-      "voice_list": [
+      "name": "noise",
+      "description": "意義不明的音效",
+      "voices": [
         {
           "name": "咕嚕咕嚕",
           "path": "https://r2.natsumoe.com/iruni/voice/咕嚕咕嚕.mp3",
@@ -511,9 +511,9 @@
       ]
     },
     {
-      "group_name": "song_lyrics",
-      "group_description": "歌曲台詞",
-      "voice_list": [
+      "name": "song_lyrics",
+      "description": "歌曲台詞",
+      "voices": [
         {
           "name": "呀咧呀咧",
           "path": "https://r2.natsumoe.com/iruni/voice/呀咧呀咧.mp3",
