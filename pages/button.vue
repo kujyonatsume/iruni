@@ -1,26 +1,14 @@
 <script setup>
 import voiceLists from '~/assets/voices.json';
 import {
-  mdiClockOutline,
-  mdiClose,
-  mdiPlay,
-  mdiRepeat,
-  mdiSelectionEllipseArrowInside,
-  mdiShuffle,
-  mdiStop,
-  mdiViewParallel,
+  mdiClose as close,
+  mdiPlay as play,
+  mdiStop as stop,
+  mdiSelectionEllipseArrowInside as selectionEllipseArrowInside,
+  mdiViewParallel as viewParallel,
+  mdiRepeat as repeat,
+  mdiShuffle as shuffle,
 } from '@mdi/js';
-
-const icons = {
-  close: mdiClose,
-  play: mdiPlay,
-  stop: mdiStop,
-  selectionEllipseArrowInside: mdiSelectionEllipseArrowInside,
-  viewParallel: mdiViewParallel,
-  repeat: mdiRepeat,
-  shuffle: mdiShuffle,
-  clockOutline: mdiClockOutline,
-};
 
 const fab = ref(false);
 
@@ -58,7 +46,7 @@ const groups = ref(voiceLists.groups);
 function playRandomVoice() {
   const getRandomInt = (max) => Math.floor(Math.random() * max);
   const randomGroup = groups.value[getRandomInt(groups.value.length)];
-  const randomVoice = randomGroup.voice_list[getRandomInt(randomGroup.voice_list.length)];
+  const randomVoice = randomGroup.voices[getRandomInt(randomGroup.voices.length)];
   play(randomVoice);
 };
 
@@ -66,7 +54,7 @@ function play(item) {
   let timer = null;
   const child = childRef.value.find(x => x.text == item.description)
   console.log(child.text);
-  
+
   const audio = new Audio(item.path);
   let setup_timer = () => {
     if (timer !== null) clear_timer();
@@ -141,7 +129,7 @@ function stopAll() {
       <template v-slot:activator="{ props }">
         <v-btn class="float-tool text-white" v-bind="props" :class="speedDial">
           <v-icon :size="24">
-            {{ fab ? icons.close : icons.play }}
+            {{ fab ? close : play }}
           </v-icon>
         </v-btn>
       </template>
@@ -149,13 +137,13 @@ function stopAll() {
       <v-btn class="btn-fab" :class="fabColor" @click="stopAll">
         <span class="fab-tip">{{ control.stop }}</span>
         <v-icon :class="fabIcon">
-          {{ icons.stop }}
+          {{ stop }}
         </v-icon>
       </v-btn>
       <v-btn class="btn-fab" :class="fabColor" @click="playRandomVoice">
         <span class="fab-tip">{{ control.pick_one }}</span>
         <v-icon :class="fabIcon">
-          {{ icons.selectionEllipseArrowInside }}
+          {{ selectionEllipseArrowInside }}
         </v-icon>
       </v-btn>
       <v-btn class="btn-fab" :class="fabColor" :disabled="random" @click="() => overlap = !overlap">
@@ -163,7 +151,7 @@ function stopAll() {
           {{ overlapText }}
         </span>
         <v-icon :class="fabIcon">
-          {{ icons.viewParallel }}
+          {{ viewParallel }}
         </v-icon>
       </v-btn>
       <v-btn class="btn-fab" :class="fabColor" :disabled="random" @click="() => repeat = !repeat">
@@ -171,25 +159,27 @@ function stopAll() {
           {{ repeatText }}
         </span>
         <v-icon :class="fabIcon">
-          {{ icons.repeat }}
+          {{ repeat }}
         </v-icon>
       </v-btn>
-      <v-btn class="btn-fab" v-model="fab" :class="fabColor" :disabled="overlap || repeat" @click="() => random = !random">
+      <v-btn class="btn-fab" v-model="fab" :class="fabColor" :disabled="overlap || repeat"
+        @click="() => random = !random">
         <span class="fab-tip">
           {{ randomText }}
         </span>
         <v-icon :class="fabIcon">
-          {{ icons.shuffle }}
+          {{ shuffle }}
         </v-icon>
       </v-btn>
     </v-speed-dial>
     <v-flex style="min-width: 85%;">
-      <v-card v-for="group in groups" :key="group.group_name">
+      <v-card v-for="group in groups" :key="group.name">
         <v-card-title class="headline text-grey-lighten">
-          {{ group.group_description }}
+          {{ group.description }}
         </v-card-title>
         <v-card-text>
-          <voice-btn v-for="item in group.voice_list" :text="item.description" :key="item.name" :ref="el => childRef.push(el)" @play="() => play(item)" />
+          <voice-btn v-for="voice in group.voices" :text="voice.description" :key="voice.name"
+            :ref="el => childRef.push(el)" @play="() => play(voice)" />
         </v-card-text>
       </v-card>
     </v-flex>
@@ -231,15 +221,16 @@ $nonlinear-transition: cubic-bezier(0.25, 0.8, 0.5, 1);
 .float-tool {
   position: fixed;
   border-radius: 28px;
-  min-width:56px;
+  min-width: 56px;
   height: 56px !important;
   z-index: 100;
   top: calc(100% - 100px);
   left: calc(100% - 100px);
 }
+
 .btn-fab {
   border-radius: 20px;
-  min-width:40px !important;
+  min-width: 40px !important;
   width: 40px;
   height: 40px;
 }
