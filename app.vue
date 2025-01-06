@@ -2,9 +2,9 @@
 import site from '~/assets/locales/default.json';
 import {
   mdiApps as apps,
-  mdiRecordPlayer as player,
-  mdiPlaylistMusicOutline as music,
-  mdiCodeTags as code_tags,
+  mdiPlayBoxMultipleOutline as playBox,
+  mdiPlaylistMusicOutline as playlist,
+  mdiCodeTags as codeTags,
   mdiBrightness2 as brightness,
   mdiGithub as github
 } from '@mdi/js'
@@ -21,8 +21,8 @@ const title = useTitle()
 
 const pages = [
   { icon: apps, title: "首頁", to: "/" },
-  { icon: player, title: "音樂播放器", to: "/player" },
-  { icon: music, title: "音效按鈕", to: "/button" },
+  { icon: playBox, title: "音樂播放器", to: "/player" },
+  { icon: playlist, title: "音效按鈕", to: "/button" },
 ]
 
 const links = [
@@ -51,7 +51,7 @@ const links = [
         </v-list-item>
         <v-divider />
         <v-list-item dense to="/about" :exact="true">
-          <v-list-item-action> <v-icon>{{ code_tags }}</v-icon> </v-list-item-action>
+          <v-list-item-action> <v-icon>{{ codeTags }}</v-icon> </v-list-item-action>
           <v-list-item-title>關於</v-list-item-title>
         </v-list-item>
       </v-list>
