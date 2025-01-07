@@ -8,12 +8,7 @@ export default defineNuxtConfig({
         port: 3000
     },
     css: ['@/assets/style.scss'],
-    modules: [
-        'vuetify-nuxt-module',
-        '@pinia/nuxt',
-        '@nuxtjs/mdc',
-        '@nuxt/content',
-    ],
+    modules: ['vuetify-nuxt-module', '@pinia/nuxt', '@nuxtjs/mdc', '@nuxt/content', '@nuxtjs/sitemap'],
     app: {
         head: {
             title: site.title,
@@ -84,5 +79,9 @@ export default defineNuxtConfig({
                 defaultSet: "mdi-svg"
             },
         },
+    },
+    site: { url: 'iruni.natsumoe.com' },
+    sitemap: {
+        xsl: false,
     }
 })
