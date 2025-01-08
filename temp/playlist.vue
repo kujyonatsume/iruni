@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 useHead({
   script: [{
     src: "https://www.youtube.com/iframe_api"
@@ -6,14 +6,20 @@ useHead({
 })
 const title = useTitle()
 title.set("歌單播放器")
-let player, videoID, result
+let player:any, result:any, name:string
 let videotime = 0;
 let lineNo = 0;
 let preLine = 1;
 let lineHeight = -30;
-
+const lyric = ref<{
+        time: string;
+        content: string;
+    }[]>()
 const lists = [
-  ["夢と葉桜", "g3ngrh-oI1A", `
+  {
+    name: "夢と葉桜",
+    id: "g3ngrh-oI1A",
+    lyric: `
 [00:28.37] この川の流れるが如く
 [00:34.07] 穏やかに音色が聞こえる
 [00:40.11] 吹く風が頬を撫でていく
@@ -42,9 +48,12 @@ const lists = [
 [03:07.00] 白い桜の花の季節は
 [03:13.65] 遠く夢の中にだけ
 [03:19.18] 舞い散る花びらの囁いた
-[03:25.14] 忘れられない言葉`],
-
-  ["漫夜", "CgaBZ4pQehI", `
+[03:25.14] 忘れられない言葉`
+  },
+  {
+    name: "漫夜",
+    id: "CgaBZ4pQehI",
+    lyric: `
 [00:20.43] 適應著規則
 [00:23.03] 學習跟上腳步 還不習慣的節奏
 [00:29.12] 螢幕黯淡了
@@ -74,9 +83,12 @@ const lists = [
 [02:43.07] 睜開眼 旋律反覆的哼在口中
 [02:47.02] 能不能 讓束縛著的昨天全部都自由
 [02:52.00] 閉上眼 指針消失在黑暗之中
-[02:56.23] 獨自一人在夢裡逗留 任思念出走`],
-
-  ["Eyes On Me", "bjhVRTXQFXA", `
+[02:56.23] 獨自一人在夢裡逗留 任思念出走`
+  },
+  {
+    name: "Eyes On Me",
+    id: "bjhVRTXQFXA",
+    lyric: `
 [00:24.56] Whenever sang my songs
 [00:29.84] On the stage , on my own
 [00:36.19] Whenever said my words
@@ -125,9 +137,12 @@ const lists = [
 [04:50.01] Shall I be the one for you
 [04:56.07] Who pinches you softly but sure
 [05:02.66] If frown is shown then
-[05:04.24] I will know that you are no dreamer`],
-
-  ["フクロウ~フクロウが知らせる客が来たと~", "_7Q1ZsFzgw8", `
+[05:04.24] I will know that you are no dreamer`
+  },
+  {
+    name: "フクロウ~フクロウが知らせる客が来たと~",
+    id: "_7Q1ZsFzgw8",
+    lyric: `
 [00:26.57]ようこそ　深い森の奥
 [00:32.06] 珍しいお客さんね
 [00:38.52] 悪いけど　ここから先では
@@ -160,9 +175,12 @@ const lists = [
 [04:23.63] ほーほーフクロウが知らせる
 [04:28.59] 何かが始まる予感
 [04:34.01] 何かが始まる予感
-[04:40.01] 何かが始まる予感`],
-
-  ["忘れじの言の葉", "598yezPqKIQ", `
+[04:40.01] 何かが始まる予感`
+  },
+  {
+    name: "忘れじの言の葉",
+    id: "598yezPqKIQ",
+    lyric: `
 [00:11.03] 言の葉を紡いで
 [00:16.64] 微睡んだ泡沫
 [00:22.18] 旅人迷い込む
@@ -197,9 +215,12 @@ const lists = [
 [03:09.70] 求め探して彷徨うてやがて詠われて
 [03:15.09] 幾千、幾万幾億の旋律となる
 [03:20.50] いつか失い奪われて 消える運命でも
-[03:25.56] それは忘れられることなき物語`],
-
-  ["金魚花火", "Ye3iQ_PuyBA", `
+[03:25.56] それは忘れられることなき物語`
+  },
+  {
+    name: "金魚花火",
+    id: "Ye3iQ_PuyBA",
+    lyric: `
 [00:25.36] 心に泳ぐ 金魚は
 [00:31.23] 恋し 想いを 募らせて
 [00:38.06] 真っ赤に 染まり 実らぬ 想いを
@@ -231,9 +252,12 @@ const lists = [
 [03:52.73] 夏の匂い 夜が包んで
 [03:59.45] ぽたぽたおちる 金魚花火
 [04:05.85] どんな言葉にも できない
-[04:12.30] 一瞬うつるの あなたの優顔`],
-
-  ["For フルーツバスケット", "tb8F54xweuA", `
+[04:12.30] 一瞬うつるの あなたの優顔`
+  },
+  {
+    name: "For フルーツバスケット",
+    id: "tb8F54xweuA",
+    lyric: `
 [00:17.01] とてもうれしかったよ
 [00:20.99] 君が笑いかけてた
 [00:24.05] すべてを溶かす微笑みで
@@ -262,9 +286,12 @@ const lists = [
 [03:03.54] 心ごとすべてなげだせたなら
 [03:10.09] ここに生きてる意味がわかるよ
 [03:13.78] 生まれおちた歓びを知る
-[03:18.05] Let's stay together いつも`],
-
-  ["月光", "l7hwGGDr5ew", `
+[03:18.05] Let's stay together いつも`
+  },
+  {
+    name: "月光",
+    id: "l7hwGGDr5ew",
+    lyric: `
 [00:01.54] 彎彎月光下 蒲公英在遊盪
 [00:06.10] 像煙花閃著微亮的光芒
 [00:11.51] 趁著夜晚 找尋幸福方向 難免會受傷
@@ -294,9 +321,12 @@ const lists = [
 [03:21.08] 彎彎月光下 我輕輕在歌唱
 [03:26.09] 從今以後 不會再悲傷
 [03:30.50] 閉上雙眼 感覺你在身旁
-[03:36.56] 你是溫暖月光 你是幸福月光`],
-
-  ["Let it Snow", "kB5XK0BbxYE", `
+[03:36.56] 你是溫暖月光 你是幸福月光`
+  },
+  {
+    name: "Let it Snow",
+    id: "kB5XK0BbxYE",
+    lyric: `
 [00:07.74] Oh, the weather outside is frightful
 [00:10.97] But the fire is so delightful
 [00:14.11] And since we've no place to go
@@ -321,9 +351,12 @@ const lists = [
 [01:31.50] The fire is slowly dying
 [01:34.79] And, my dear, we're still goodbye-ing
 [01:38.47] But as long as you love me so
-[01:41.93] Let it snow, Let it snow, and snow`],
-
-  ["桃花諾", "1h0oYsSw8-E", `
+[01:41.93] Let it snow, Let it snow, and snow`
+  },
+  {
+    name: "桃花諾",
+    id: "1h0oYsSw8-E",
+    lyric: `
 [00:19.00] 初見若繾綣誓言風吹雲舒捲
 [00:26.08] 歲月間問今夕又何年
 [00:32.49] 心有犀但願執念輪迴過經年
@@ -348,9 +381,12 @@ const lists = [
 [02:50.14] 虔誠夙願來世路 一念桃花因果渡
 [02:57.21] 那一念幾闕時光在重複
 [03:03.80] 聽雨書望天湖 人間寥寥情難訴
-[03:10.54] 回憶斑斑留在愛你的路`],
-
-  ["左手指月", "qDGI4_a6wi0", `
+[03:10.54] 回憶斑斑留在愛你的路`
+  },
+  {
+    name: "左手指月",
+    id: "qDGI4_a6wi0",
+    lyric: `
 [00:24.28] 左手握大地右手握著天
 [00:31.08] 掌紋裂出了十方的閃電
 [00:37.46] 把時光匆匆兌換成了年
@@ -376,15 +412,16 @@ const lists = [
 [03:15.08] 我左手拿起你右手放下你
 [03:22.15] 合掌時你全部被收回心間
 [03:28.00] 一炷香 啊啊啊
-[03:34.04] 你是我 無二無別`],
-]
+[03:34.04] 你是我 無二無別`
+  },
+].map(x => ({ ...x, lyric: parseLyric(x.lyric) }))
 
 onMounted(switchVideo)
 
 function setupVideoAndLyrics() {
-  const [name, videoID, lyric] = lists[Math.floor(Math.random() * lists.length)];
-  let result = parseLyric(lyric);
-
+  var item = lists[Math.floor(Math.random() * lists.length)];
+  lyric.value = item.lyric
+  
   // Clear previous lyrics
   const bg = document.querySelector(".bg");
   bg.innerHTML = "";
@@ -397,7 +434,7 @@ function setupVideoAndLyrics() {
   }
   bg.appendChild(ul);
 
-  return { videoID, result };
+  return { id, result };
 }
 
 function onYouTubeIframeAPIReady() {
@@ -499,7 +536,7 @@ function switchVideo() {
   videotime = 0;
 
   // Setup new video and lyrics
-  ({ videoID, result } = setupVideoAndLyrics());
+  ({ id, result } = setupVideoAndLyrics());
 
   // Reinitialize YouTube player
   onYouTubeIframeAPIReady();
@@ -511,7 +548,11 @@ function switchVideo() {
   <v-layout id="videobox">
     <div id="ytplayer"></div>
     <br>
-    <div class="bg"></div>
+    <div class="bg">
+      <ul>
+        <li v-for="i in lyric"></li>
+      </ul>
+    </div>
   </v-layout>
 </template>
 
