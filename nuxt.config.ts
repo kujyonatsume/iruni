@@ -3,10 +3,8 @@ import colors from 'vuetify/lib/util/colors.mjs'
 export default defineNuxtConfig({
     compatibilityDate: '2024-11-01',
     devtools: { enabled: true },
-    devServer: {
-        host: "localhost",
-        port: 3000
-    },
+    sitemap: { xsl: false },
+    site: { url: 'iruni.natsumoe.com' },
     css: ['@/assets/style.scss'],
     modules: ['vuetify-nuxt-module', '@pinia/nuxt', '@nuxtjs/mdc', '@nuxt/content', '@nuxtjs/sitemap'],
     app: {
@@ -15,25 +13,13 @@ export default defineNuxtConfig({
             meta: [
                 { charset: 'utf-8' },
                 { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-                {
-                    hid: 'description',
-                    name: 'description',
-                    content: site.description
-                },
-                {
-                    hid: 'keywords',
-                    name: 'keywords',
-                    content: site.keywords
-                },
+                { hid: 'keywords', name: 'keywords', content: site.keywords },
+                { hid: 'description', name: 'description', content: site.description },
                 { hid: 'og:site_name', property: 'og:site_name', content: site.title },
                 { hid: 'og:type', property: 'og:type', content: 'website' },
                 { hid: 'og:url', property: 'og:url', content: site.title },
                 { hid: 'og:title', property: 'og:title', content: site.title },
-                {
-                    hid: 'og:description',
-                    property: 'og:description',
-                    content: site.description
-                },
+                { hid: 'og:description', property: 'og:description', content: site.description },
                 { hid: 'og:image', property: 'og:image', content: site.social_image },
                 { name: 'twitter:card', content: 'summary_large_image' },
                 { name: 'twitter:site', content: '@_natsume0304' },
@@ -84,8 +70,4 @@ export default defineNuxtConfig({
             },
         },
     },
-    site: { url: 'iruni.natsumoe.com' },
-    sitemap: {
-        xsl: false,
-    }
 })
