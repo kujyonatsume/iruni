@@ -1,19 +1,19 @@
-<script setup>
-useHead({
-  script: [{
-    src: "https://www.youtube.com/iframe_api"
-  }]
-})
-const title = useTitle()
-title.set("歌單播放器")
-let player, videoID, result
-let videotime = 0;
-let lineNo = 0;
-let preLine = 1;
-let lineHeight = -30;
+<script setup lang="jsx">
+useHead({ script: [{ src: "https://www.youtube.com/iframe_api" }] });
+useTitle().set("歌單播放器");
+const dark = useDark()
+let player
 
-const lists = [
-  ["夢と葉桜", "g3ngrh-oI1A", `
+const currentTime = ref(0)
+/** @type {Ref<HTMLDivElement>} type - description */
+const lyricsRef = ref()
+const lineHeight = 30
+
+const playlists = reactive([
+  {
+    title: "夢と葉桜",
+    videoId: "g3ngrh-oI1A",
+    lyric: `
 [00:28.37] この川の流れるが如く
 [00:34.07] 穏やかに音色が聞こえる
 [00:40.11] 吹く風が頬を撫でていく
@@ -42,9 +42,12 @@ const lists = [
 [03:07.00] 白い桜の花の季節は
 [03:13.65] 遠く夢の中にだけ
 [03:19.18] 舞い散る花びらの囁いた
-[03:25.14] 忘れられない言葉`],
-
-  ["漫夜", "CgaBZ4pQehI", `
+[03:25.14] 忘れられない言葉`
+  },
+  {
+    title: "漫夜",
+    videoId: "CgaBZ4pQehI",
+    lyric: `
 [00:20.43] 適應著規則
 [00:23.03] 學習跟上腳步 還不習慣的節奏
 [00:29.12] 螢幕黯淡了
@@ -74,9 +77,12 @@ const lists = [
 [02:43.07] 睜開眼 旋律反覆的哼在口中
 [02:47.02] 能不能 讓束縛著的昨天全部都自由
 [02:52.00] 閉上眼 指針消失在黑暗之中
-[02:56.23] 獨自一人在夢裡逗留 任思念出走`],
-
-  ["Eyes On Me", "bjhVRTXQFXA", `
+[02:56.23] 獨自一人在夢裡逗留 任思念出走`
+  },
+  {
+    title: "Eyes On Me",
+    videoId: "bjhVRTXQFXA",
+    lyric: `
 [00:24.56] Whenever sang my songs
 [00:29.84] On the stage , on my own
 [00:36.19] Whenever said my words
@@ -125,9 +131,12 @@ const lists = [
 [04:50.01] Shall I be the one for you
 [04:56.07] Who pinches you softly but sure
 [05:02.66] If frown is shown then
-[05:04.24] I will know that you are no dreamer`],
-
-  ["フクロウ~フクロウが知らせる客が来たと~", "_7Q1ZsFzgw8", `
+[05:04.24] I will know that you are no dreamer`
+  },
+  {
+    title: "フクロウ~フクロウが知らせる客が来たと~",
+    videoId: "_7Q1ZsFzgw8",
+    lyric: `
 [00:26.57]ようこそ　深い森の奥
 [00:32.06] 珍しいお客さんね
 [00:38.52] 悪いけど　ここから先では
@@ -160,9 +169,12 @@ const lists = [
 [04:23.63] ほーほーフクロウが知らせる
 [04:28.59] 何かが始まる予感
 [04:34.01] 何かが始まる予感
-[04:40.01] 何かが始まる予感`],
-
-  ["忘れじの言の葉", "598yezPqKIQ", `
+[04:40.01] 何かが始まる予感`
+  },
+  {
+    title: "忘れじの言の葉",
+    videoId: "598yezPqKIQ",
+    lyric: `
 [00:11.03] 言の葉を紡いで
 [00:16.64] 微睡んだ泡沫
 [00:22.18] 旅人迷い込む
@@ -197,9 +209,12 @@ const lists = [
 [03:09.70] 求め探して彷徨うてやがて詠われて
 [03:15.09] 幾千、幾万幾億の旋律となる
 [03:20.50] いつか失い奪われて 消える運命でも
-[03:25.56] それは忘れられることなき物語`],
-
-  ["金魚花火", "Ye3iQ_PuyBA", `
+[03:25.56] それは忘れられることなき物語`
+  },
+  {
+    title: "金魚花火",
+    videoId: "Ye3iQ_PuyBA",
+    lyric: `
 [00:25.36] 心に泳ぐ 金魚は
 [00:31.23] 恋し 想いを 募らせて
 [00:38.06] 真っ赤に 染まり 実らぬ 想いを
@@ -231,9 +246,12 @@ const lists = [
 [03:52.73] 夏の匂い 夜が包んで
 [03:59.45] ぽたぽたおちる 金魚花火
 [04:05.85] どんな言葉にも できない
-[04:12.30] 一瞬うつるの あなたの優顔`],
-
-  ["For フルーツバスケット", "tb8F54xweuA", `
+[04:12.30] 一瞬うつるの あなたの優顔`
+  },
+  {
+    title: "For フルーツバスケット",
+    videoId: "tb8F54xweuA",
+    lyric: `
 [00:17.01] とてもうれしかったよ
 [00:20.99] 君が笑いかけてた
 [00:24.05] すべてを溶かす微笑みで
@@ -262,9 +280,12 @@ const lists = [
 [03:03.54] 心ごとすべてなげだせたなら
 [03:10.09] ここに生きてる意味がわかるよ
 [03:13.78] 生まれおちた歓びを知る
-[03:18.05] Let's stay together いつも`],
-
-  ["月光", "l7hwGGDr5ew", `
+[03:18.05] Let's stay together いつも`
+  },
+  {
+    title: "月光",
+    videoId: "l7hwGGDr5ew",
+    lyric: `
 [00:01.54] 彎彎月光下 蒲公英在遊盪
 [00:06.10] 像煙花閃著微亮的光芒
 [00:11.51] 趁著夜晚 找尋幸福方向 難免會受傷
@@ -294,9 +315,12 @@ const lists = [
 [03:21.08] 彎彎月光下 我輕輕在歌唱
 [03:26.09] 從今以後 不會再悲傷
 [03:30.50] 閉上雙眼 感覺你在身旁
-[03:36.56] 你是溫暖月光 你是幸福月光`],
-
-  ["Let it Snow", "kB5XK0BbxYE", `
+[03:36.56] 你是溫暖月光 你是幸福月光`
+  },
+  {
+    title: "Let it Snow",
+    videoId: "kB5XK0BbxYE",
+    lyric: `
 [00:07.74] Oh, the weather outside is frightful
 [00:10.97] But the fire is so delightful
 [00:14.11] And since we've no place to go
@@ -321,9 +345,12 @@ const lists = [
 [01:31.50] The fire is slowly dying
 [01:34.79] And, my dear, we're still goodbye-ing
 [01:38.47] But as long as you love me so
-[01:41.93] Let it snow, Let it snow, and snow`],
-
-  ["桃花諾", "1h0oYsSw8-E", `
+[01:41.93] Let it snow, Let it snow, and snow`
+  },
+  {
+    title: "桃花諾",
+    videoId: "1h0oYsSw8-E",
+    lyric: `
 [00:19.00] 初見若繾綣誓言風吹雲舒捲
 [00:26.08] 歲月間問今夕又何年
 [00:32.49] 心有犀但願執念輪迴過經年
@@ -348,9 +375,12 @@ const lists = [
 [02:50.14] 虔誠夙願來世路 一念桃花因果渡
 [02:57.21] 那一念幾闕時光在重複
 [03:03.80] 聽雨書望天湖 人間寥寥情難訴
-[03:10.54] 回憶斑斑留在愛你的路`],
-
-  ["左手指月", "qDGI4_a6wi0", `
+[03:10.54] 回憶斑斑留在愛你的路`
+  },
+  {
+    title: "左手指月",
+    videoId: "qDGI4_a6wi0",
+    lyric: `
 [00:24.28] 左手握大地右手握著天
 [00:31.08] 掌紋裂出了十方的閃電
 [00:37.46] 把時光匆匆兌換成了年
@@ -376,181 +406,140 @@ const lists = [
 [03:15.08] 我左手拿起你右手放下你
 [03:22.15] 合掌時你全部被收回心間
 [03:28.00] 一炷香 啊啊啊
-[03:34.04] 你是我 無二無別`],
-]
+[03:34.04] 你是我 無二無別`
+  },
+].map(x => ({
+  ...x, lyric: x.lyric.trim().split("\n").map(l => l.slice(1).split("]")).map(l => {
+    let n = l[0].split(":").map(Number)
+    console.log(l[1]?.length);
 
-onMounted(switchVideo)
-
-function setupVideoAndLyrics() {
-  const [name, videoID, lyric] = lists[Math.floor(Math.random() * lists.length)];
-  let result = parseLyric(lyric);
-
-  // Clear previous lyrics
-  const bg = document.querySelector(".bg");
-  bg.innerHTML = "";
-
-  let ul = document.createElement("ul");
-  for (let i = 0; i < result.length; i++) {
-    let li = document.createElement("li");
-    li.textContent = result[i].content;
-    ul.appendChild(li);
-  }
-  bg.appendChild(ul);
-
-  return { videoID, result };
-}
-
+    return { time: n[0] * 60 + n[1], text: l[1] }
+  })
+})))
+const current = ref(0)
+// 初始化播放器
 function onYouTubeIframeAPIReady() {
-  player = new YT.Player("ytplayer", {
-    videoId: videoID,
+  player = new YT.Player('player', {
+    height: '360',
+    width: '640',
+    videoId: nextSong(nextId()),
+    playerVars: { autoplay: 1, controls: 1 },
     events: {
-      onReady(event) {
-        event.target.playVideo();
-        function updateTime() {
-          if (player && player.getCurrentTime) {
-            videotime = player.getCurrentTime();
-            videoTimeUpdater();
-          }
-        }
-        timeupdater = setInterval(updateTime, 100);
-      },
-      onStateChange(event) {
-        if (event.data === YT.PlayerState.ENDED) {
-          switchVideo();
-        }
-      }
-    }
-  });
+      onReady: onPlayerReady,
+      onStateChange: onPlayerStateChange,
+    },
+  })
 }
 
-function parseLyric(lyric) {
-  let lyricArr = lyric.split("\n");
-  let result = [];
-  for (let i = 0; i < lyricArr.length; i++) {
-    let playTimeArr = lyricArr[i].match(/\[\d{2}:\d{2}((\.|\:)\d{2})\]/g);
-    let lineLyric = "";
-    if (lyricArr[i].split(playTimeArr).length > 0) {
-      lineLyric = lyricArr[i].split(playTimeArr);
-    }
-    if (playTimeArr != null) {
-      for (let j = 0; j < playTimeArr.length; j++) {
-        let time = playTimeArr[j].substring(1, playTimeArr[j].indexOf("]")).split(":");
-        result.push({
-          time: (parseInt(time[0]) * 60 + parseFloat(time[1])).toFixed(4),
-          content: lineLyric.slice(1)
-        });
-      }
-    }
-  }
-  return result;
+function onPlayerReady() {
+  player.playVideo()
 }
 
-function highLight() {
-  let lis = document.querySelectorAll("li");
-  for (let i = 0; i < lis.length; i++) {
-    if (i === lineNo) {
-      lis[i].classList.add("active");
-    } else {
-      lis[i].classList.remove("active");
-    }
-  }
-  if (lineNo > preLine) {
-    let ul = document.querySelector("ul");
-    ul.style.transition = "top 0.5s ease-in-out";
-    ul.style.top = (lineNo - preLine) * lineHeight + "px";
+function onPlayerStateChange(event) {
+  if (event.data === YT.PlayerState.ENDED) {
+    selectSong(nextId())
   }
 }
 
-function videoTimeUpdater() {
-  if (lineNo === result.length) return;
-  const firstLi = document.querySelector("li");
-  if (firstLi && firstLi.classList.contains("active")) {
-    const ul = document.querySelector("ul");
-    ul.style.top = "0";
-  }
-  lineNo = getLineNo(videotime);
-  highLight();
-  lineNo++;
+function nextId() {
+  return Math.floor(Math.random() * playlists.length)
 }
 
-function getLineNo(videotime) {
-  if (videotime >= parseFloat(result[lineNo].time)) {
-    for (let i = result.length - 1; i >= lineNo; i--) {
-      if (videotime >= parseFloat(result[i].time)) {
-        return i;
-      }
-    }
-  } else {
-    for (let i = 0; i <= lineNo; i++) {
-      if (videotime <= parseFloat(result[i].time)) {
-        return i - 1;
+// 切換歌曲
+function nextSong(id) {
+  return playlists[current.value = id].videoId
+}
+
+function selectSong(id) {
+  player.loadVideoById(nextSong(id))
+}
+
+// 自動滾動歌詞
+function updateLyricsScroll() {
+  const matchedLine = playlists[current.value].lyric.findIndex(line => line.time > currentTime.value) - 1
+  if (matchedLine >= 0) {
+    // 計算當前行的偏移量
+    if (lyricsRef.value) {
+      const scrollPosition = (matchedLine - 1) * lineHeight
+      // 設置滾動位置
+      for (let i = 0; i < lyricsRef.value.children.length; i++) {
+        const element = lyricsRef.value.children.item(i)
+        element.style.top = `-${scrollPosition}px`
       }
     }
   }
 }
 
-function switchVideo() {
-  // Stop current video
-  if (player) player.destroy();
-
-  // Reset state
-  lineNo = 0;
-  preLine = 1;
-  videotime = 0;
-
-  // Setup new video and lyrics
-  ({ videoID, result } = setupVideoAndLyrics());
-
-  // Reinitialize YouTube player
-  onYouTubeIframeAPIReady();
-}
-
+onMounted(() => {
+  onYouTubeIframeAPIReady()
+  // 定時更新當前播放時間
+  const interval = setInterval(() => {
+    if (!player?.getCurrentTime) return
+    currentTime.value = player.getCurrentTime()
+    updateLyricsScroll()
+  }, 100)
+  // 清除 interval
+  onBeforeUnmount(() => { clearInterval(interval) })
+})
 </script>
 
 <template>
-  <v-layout id="videobox">
-    <div id="ytplayer"></div>
-    <br>
-    <div class="bg"></div>
-  </v-layout>
+  <div class="player-container" style="display: flex; justify-content: center;">
+    <div class="video-container">
+      <h1>{{ playlists[current].title }}</h1>
+
+      <div id="player"></div>
+
+      <ul class="lyrics-container" ref="lyricsRef">
+        <li v-for="(line, index) in playlists[current].lyric" :key="index"
+          :class="{ active: currentTime >= line.time && currentTime < (playlists[current].lyric[index + 1]?.time || Infinity) }"
+          class="lyric-line" :style="{ position: 'relative', top: `${(index - matchedLine) * lineHeight}px` }">
+          {{ line.text }}
+        </li>
+      </ul>
+    </div>
+    <div class="title-container">
+      <h1 style="text-align: center;">歌單</h1>
+      <div>
+        <v-btn class="song-btn" :class="{ active: dark.data ? current == index : current != index }" style="display: block; margin: 3px;" v-for="(item, index) in playlists" :key="index"
+          @click="selectSong(index)">{{ item.title }}</v-btn>
+      </div>
+    </div>
+  </div>
 </template>
 
-<style>
-.bg {
+<style scoped>
+.title-container {
+  text-align: left;
+  margin: 0px 20px;
+}
+
+.player-container {
+  text-align: center;
+  margin: 20px auto;
+}
+
+.lyrics-container {
   width: 100%;
   height: 150px;
   margin: 15px auto;
   color: darkgrey;
   font-size: 14px;
+  position: relative;
   overflow: hidden;
-  position: relative;
 }
 
-.bg ul {
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  list-style: none;
-}
-
-.bg ul li {
-  width: 100%;
-  height: 30px;
+.lyric-line {
+  transition: top 1.0s ease-out;
   line-height: 30px;
-  text-align: center;
+  font-size: 18px;
+  color: #666;
 }
-
-.bg ul li.active {
-  color: black;
-  font-size: 15px;
+.song-btn.active {
+  color: #2b52ff;
 }
-
-#videobox {
-  display: flex !important;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  height: 50%;
+.lyric-line.active {
+  color: #2b52ff;
+  font-weight: bold;
 }
 </style>
