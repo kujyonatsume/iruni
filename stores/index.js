@@ -4,5 +4,5 @@ export const useDark = defineStore('dark', () => {
 })
 export const useTitle = defineStore('title', () => {
     const data = ref("")
-    return { data, set: (text: string) => data.value = text }
+    return { data, set: (text) => data.value = text }
 })
