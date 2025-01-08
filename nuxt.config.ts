@@ -43,7 +43,10 @@ export default defineNuxtConfig({
                 { rel: 'icon', type: 'image/png', href: site.icon },
                 { rel: 'shortcut icon', type: 'image/png', href: site.icon }
             ],
-            script:["https://www.googletagmanager.com/gtag/js?id=G-GELZQM159V"]
+            script:[
+                "https://www.googletagmanager.com/gtag/js?id=G-GELZQM159V",
+                "/js/analytics.js"
+            ]
         },
     },
     vuetify: {
