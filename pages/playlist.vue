@@ -318,6 +318,45 @@ const playlists = reactive([
 [03:36.56] 你是溫暖月光 你是幸福月光`
   },
   {
+    title: "檄！帝國華擊團",
+    videoId: "3KNmAjRmd40",
+    lyric: `
+
+`
+  },
+  {
+    title: "檄！帝國華擊團",
+    videoId: "3KNmAjRmd40",
+    lyric: `
+[00:20.90] 引き裂いた　闇が吠え
+[00:24.59] 震える帝都に
+[00:28.21] 愛の歌　高らかに
+[00:31.00] 踴り出る戦士たち
+[00:34.93] 心まで　鋼鉄に
+[00:38.00] 武裝する乙女
+[00:41.28] 悪を蹴散らして
+[00:44.56] 正義をしめすのだ
+[00:49.14] 走れ　光速の 帝國華撃団
+[00:55.50] 唸れ　衝撃の 帝國華撃団
+[01:04.56] 
+[01:37.09] 「わたしたち　正義のために戦います」
+[01:40.40] 「たとえ　それが命をかける戦いであっても」
+[01:43.67] 「あたいたちは　一歩も引かないぜ！」
+[01:46.17] 「それが　帝國華撃団なのです！」
+[01:50.53] 街の燈が　消え果てて
+[01:53.95] 脅える帝都に
+[01:57.46] 虹の色　染め上げて
+[02:00.40] 躍り出る戦士たち
+[02:03.99] 暁に　激情を
+[02:07.49] 照らし出す乙女
+[02:10.80] 悪を滅ぼして
+[02:14.03] 正義をしめすのだ
+[02:18.19] 走れ　光速の 帝國華撃団
+[02:25.31] 唸れ　衝撃の 帝國華撃団
+[02:32.18] 走れ　光速の 帝國華撃団
+[02:38.66] 唸れ　衝撃の 帝國華撃団`
+  },
+  {
     title: "Let it Snow",
     videoId: "kB5XK0BbxYE",
     lyric: `
@@ -501,7 +540,8 @@ onMounted(() => {
     <div class="title-container">
       <h1 style="text-align: center;">歌單</h1>
       <div>
-        <v-btn class="song-btn" :class="{ active: dark.data ? current == index : current != index }" style="display: block; margin: 3px;" v-for="(item, index) in playlists" :key="index"
+        <v-btn class="song-btn" :class="{ active: dark.data ? current == index : current != index }"
+          style="display: block; margin: 3px;" v-for="(item, index) in playlists" :key="index"
           @click="selectSong(index)">{{ item.title }}</v-btn>
       </div>
     </div>
@@ -535,9 +575,11 @@ onMounted(() => {
   font-size: 18px;
   color: #666;
 }
+
 .song-btn.active {
   color: #2b52ff;
 }
+
 .lyric-line.active {
   color: #2b52ff;
   font-weight: bold;
