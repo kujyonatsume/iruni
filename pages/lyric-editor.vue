@@ -2,11 +2,10 @@
 import { mdiPlay, mdiRewind, mdiFastForward, mdiUpdate, mdiDelete, mdiPlus, mdiContentCopy } from "@mdi/js"
 useTitle().set("歌曲打軸");
 const audio = ref(null);
-const lyricsInput = ref("")
 const lyricsList = ref([]);
 
 const timeRegex = /\[(\d+):(\d+\.\d+)\]/
-const obj = { title: "", videoId: "", lyric: "" }
+const obj = ref({ title: "", videoId: "", lyric: "" })
 // 音樂上傳功能
 function uploadAudio(event) {
     /** @type {HTMLInputElement} type - description */
@@ -14,8 +13,8 @@ function uploadAudio(event) {
     const file = e.files[0];
     if (file) {
         const nameMatch = file.name.match(/(?:\d+-\d+) (.*?) \[(.*?)\]/)
-        obj.title = nameMatch[1]
-        obj.videoId = nameMatch[2]
+        obj.value.title = nameMatch[1]
+        obj.value.videoId = nameMatch[2]
         const url = URL.createObjectURL(file);
         audio.value.src = url;
         audio.value.play();
@@ -27,7 +26,7 @@ function jump(seconds) { audio.value.currentTime = Math.max(0, Math.min(audio.va
 
 // 載入歌詞到編輯區
 function updateLyrics() {
-    const lyrics = lyricsInput.value.trim().split('\n');
+    const lyrics = obj.value.lyric.trim().split('\n');
     lyricsList.value = lyrics.map((line, index) => ({ time: line.match(timeRegex)?.[0] ?? "[99:59.99]", lyrics: line.replace(timeRegex, "").trim(), index }));
 };
 
@@ -67,8 +66,7 @@ function insertEmptyLine() {
 };
 
 async function copy() {
-    obj.lyric = lyricsInput.value
-    const text = JSON.stringify(obj, null, 4)
+    const text = JSON.stringify(obj.value, null, 4)
     if (navigator.clipboard) {
         await navigator.clipboard.writeText(text)
             .then((res) => console.log("複製連結成功"))
@@ -86,7 +84,7 @@ function sortLyricsList() {
         const timeBSeconds = parseInt(timeB[1], 10) * 60 + parseFloat(timeB[2]);
         return timeASeconds - timeBSeconds;
     });
-    lyricsInput.value = lyricsList.value.map(x => `${x.time} ${x.lyrics}`).join("\n")
+    obj.value.lyric = lyricsList.value.map(x => `${x.time} ${x.lyrics}`).join("\n")
 };
 
 </script>
@@ -95,6 +93,7 @@ function sortLyricsList() {
     <v-container>
         <v-file-input label="上傳音樂" accept="audio/*,video/*" @change="uploadAudio" />
         <audio :style="{ margin: '2px' }" style="width: 100%;" ref="audio" controls> 您的瀏覽器不支援 audio 標籤</audio>
+        <h3></h3>
         <div :style="{ margin: '2px' }">
             <div style="display: flex;" v-for="(item, index) in lyricsList" :key="index"
                 @dblclick="playAtTime(item.time)">

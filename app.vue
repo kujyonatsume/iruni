@@ -6,7 +6,8 @@ import {
   mdiPlaylistMusicOutline as playlist,
   mdiCodeTags as codeTags,
   mdiBrightness2 as brightness,
-  mdiGithub as github
+  mdiGithub as github,
+  mdiTextBoxEdit as textEditer
 } from '@mdi/js'
 
 const dark = useDark()
@@ -34,6 +35,11 @@ const links = [
   { icon: "./img/threads-fill.svg", title: "Threads", to: "https://www.threads.net/@iruni_ianvs" }
 ]
 
+const tools = [
+  { icon: textEditer, title: "歌詞編輯器", to: "/lyric-editor" },
+  { icon: codeTags, title: "關於", to: "/about" }
+]
+
 </script>
 <template>
   <v-app>
@@ -50,9 +56,9 @@ const links = [
           <v-list-item-title>{{ item.title }}</v-list-item-title>
         </v-list-item>
         <v-divider />
-        <v-list-item dense to="/about" :exact="true">
-          <v-list-item-action> <v-icon>{{ codeTags }}</v-icon> </v-list-item-action>
-          <v-list-item-title>關於</v-list-item-title>
+        <v-list-item v-for="(item, i) in tools" :key="i" :href="item.to">
+          <v-list-item-action> <v-icon>{{ item.icon }}</v-icon> </v-list-item-action>
+          <v-list-item-title>{{ item.title }}</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
