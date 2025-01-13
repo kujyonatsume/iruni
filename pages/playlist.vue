@@ -1,4 +1,4 @@
-<script setup lang="jsx">
+<script setup>
 useHead({ script: [{ src: "https://www.youtube.com/iframe_api" }] });
 useTitle().set("歌單播放器");
 const dark = useDark()
