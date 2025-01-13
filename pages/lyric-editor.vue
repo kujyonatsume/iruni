@@ -1,11 +1,12 @@
 <script setup>
-import { mdiPlay, mdiRewind, mdiFastForward, mdiUpdate, mdiDelete, mdiPlus, mdiContentCopy } from "@mdi/js"
+import { mdiPlay, mdiRewind, mdiFastForward, mdiUpdate, mdiDelete, mdiPlus, mdiContentCopy, mdiMenuUp, mdiMenuDown } from "@mdi/js"
 useTitle().set("歌曲打軸");
-const audio = ref(null);
+/** @type {Ref<HTMLAudioElement>} type - description */
+const audio = ref();
 const edittxt = ref(true);
 const lyricsList = ref([]);
 
-const timeRegex = /\[(\d+):(\d+\.\d+)\]/
+const timeRegex = /\[?(\d+):(\d+\.\d+)\]?/
 const obj = ref({ title: "", videoId: "", lyric: "" })
 // 音樂上傳功能
 function uploadAudio(event) {
@@ -28,25 +29,28 @@ function jump(seconds) { audio.value.currentTime = Math.max(0, Math.min(audio.va
 // 載入歌詞到編輯區
 function updateLyrics() {
     const lyrics = obj.value.lyric.trim().split('\n');
-    lyricsList.value = lyrics.map((line, index) => ({ time: line.match(timeRegex)?.[0] ?? "[99:59.99]", lyrics: line.replace(timeRegex, "").trim(), index }));
+    lyricsList.value = lyrics.map((line, index) => ({ time: line.match(timeRegex) ?? "[99:59.99]", lyrics: line.replace(timeRegex, "").trim(), index }));
 };
 
 // 點擊「更新時間」按鈕
-function updateTime(index) {
-    const currentTime = audio.value.currentTime;
-    const minutes = Math.floor(currentTime / 60);
-    const seconds = (currentTime % 60).toFixed(2);
-    lyricsList.value[index].time = `[${minutes.toString().padStart(2, '0')}:${seconds.padStart(5, '0')}]`;
+function updateTime(index, num) {
+    if (num) {
+        const match = lyricsList.value[index].time.match(timeRegex)
+        num += Number(match[1], 10) * 60 + Number(match[2]);
+        num = Math.max(num, 0)
+    }
+    else num = audio.value.currentTime;
+    const minutes = `${Math.floor(num / 60)}`;
+    const seconds = (num % 60).toFixed(2);
+    lyricsList.value[index].time = `[${minutes.padStart(2, '0')}:${seconds.padStart(5, '0')}]`;
     sortLyricsList()
 };
-
-
 
 // 點擊「播放」按鈕
 function playAtTime(timeValue) {
     const match = timeValue.match(timeRegex);
     if (match) {
-        audio.value.currentTime = parseInt(match[1], 10) * 60 + parseFloat(match[2]);
+        audio.value.currentTime = Number(match[1], 10) * 60 + Number(match[2]);
         audio.value.play();
     }
 };
@@ -94,28 +98,40 @@ function sortLyricsList() {
     <v-container>
         <v-file-input label="上傳音樂" accept="audio/*,video/*" @change="uploadAudio" />
         <audio :style="{ margin: '2px' }" style="width: 100%;" ref="audio" controls> 您的瀏覽器不支援 audio 標籤</audio>
-        
+
         <div style="display: flex;justify-content: space-between; justify-items: center;">
             <div :style="{ margin: '2px' }">
-            <v-btn :style="{ margin: '2px' }" @click="insertEmptyLine"><v-icon>{{ mdiPlus }}</v-icon></v-btn>
-            <v-btn :style="{ margin: '2px' }" @click="jump(-3)"><v-icon>{{ mdiRewind }}</v-icon></v-btn>
-            <v-btn :style="{ margin: '2px' }" @click="jump(+3)"><v-icon>{{ mdiFastForward }}</v-icon></v-btn>
-        </div>
-        <h3>{{ obj.title }}</h3>
-        <v-btn :disabled= "obj.title == ''" target="_blank" rel="noreferrer" :href="`https://www.bing.com/search?q=${obj.title} 歌詞 kkbox`">搜尋歌詞</v-btn>
+                <v-btn :style="{ margin: '2px' }" @click="insertEmptyLine"><v-icon>{{ mdiPlus }}</v-icon></v-btn>
+                <v-btn :style="{ margin: '2px' }" @click="jump(-3)"><v-icon>{{ mdiRewind }}</v-icon></v-btn>
+                <v-btn :style="{ margin: '2px' }" @click="jump(+3)"><v-icon>{{ mdiFastForward }}</v-icon></v-btn>
+            </div>
+            <h3>{{ obj.title }}</h3>
+            <v-btn :disabled="obj.title == ''" target="_blank" rel="noreferrer"
+                :href="`https://www.bing.com/search?q=${obj.title} 歌詞 kkbox`">搜尋歌詞</v-btn>
         </div>
         <v-textarea v-if="edittxt" :style="{ margin: '2px' }" v-model="obj.lyric" @update:model-value="updateLyrics"
             rows="20" outlined />
         <div v-else class="lyrics-container">
             <div style="display: flex;" v-for="(item, index) in lyricsList" :key="index"
                 @dblclick="playAtTime(item.time)">
-                <v-btn :style="{ margin: '2px' }" @click="updateTime(index)" color="primary"><v-icon>{{ mdiUpdate
-                        }}</v-icon></v-btn>
-                <input :style="{ margin: '2px' }" @change="sortLyricsList" v-model="item.time"
-                    style="width: 150px; text-align: center;" />
+                <v-btn :style="{ margin: '2px' }" @click="() => updateTime(index, 0)" color="primary"><v-icon>{{
+                        mdiUpdate }}</v-icon></v-btn>
+                <div style="display: flex;justify-content: left;">
+                    <input :style="{ margin: '2px' }" @change="sortLyricsList" v-model="item.time"
+                        style="width: 100px; text-align: center;" />
+                    <div :style="{ margin: '2px', width: '50px' }"
+                        style="display: flex; flex-direction: column; align-content: center;">
+                        <v-btn :min-width="'50px'" :style="{ height: '50%', width: '50px' }"
+                            @click="() => updateTime(index, +0.5)" color="primary"><v-icon>{{ mdiMenuUp
+                                }}</v-icon></v-btn>
+                        <v-btn :min-width="'50px'" :style="{ height: '50%', width: '50px' }"
+                            @click="() => updateTime(index, -0.5)" color="primary"><v-icon>{{ mdiMenuDown
+                                }}</v-icon></v-btn>
+                    </div>
+                </div>
                 <input :style="{ margin: '2px' }" @change="sortLyricsList" v-model="item.lyrics" style="width: 100%;" />
                 <v-btn :style="{ margin: '2px' }" @click="deleteLine(index)" color="error"><v-icon>{{ mdiDelete
-                }}</v-icon></v-btn>
+                        }}</v-icon></v-btn>
             </div>
         </div>
         <v-btn :style="{ margin: '2px' }" @click="edittxt = !edittxt">切換模式</v-btn>
