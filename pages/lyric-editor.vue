@@ -3,9 +3,9 @@ import { mdiPlay, mdiRewind, mdiFastForward, mdiUpdate, mdiDelete, mdiPlus, mdiC
 useTitle().set("歌曲打軸");
 const audio = ref(null);
 const lyricsList = ref([]);
-
+const lyricInput = ref("")
 const timeRegex = /\[(\d+):(\d+\.\d+)\]/
-const obj = ref({ title: "", videoId: "", lyric: "" })
+const obj = { title: "", videoId: "", lyric: "" }
 // 音樂上傳功能
 function uploadAudio(event) {
     /** @type {HTMLInputElement} type - description */
@@ -13,8 +13,8 @@ function uploadAudio(event) {
     const file = e.files[0];
     if (file) {
         const nameMatch = file.name.match(/(?:\d+-\d+) (.*?) \[(.*?)\]/)
-        obj.value.title = nameMatch[1]
-        obj.value.videoId = nameMatch[2]
+        obj.title = nameMatch[1]
+        obj.videoId = nameMatch[2]
         const url = URL.createObjectURL(file);
         audio.value.src = url;
         audio.value.play();
@@ -26,7 +26,7 @@ function jump(seconds) { audio.value.currentTime = Math.max(0, Math.min(audio.va
 
 // 載入歌詞到編輯區
 function updateLyrics() {
-    const lyrics = obj.value.lyric.trim().split('\n');
+    const lyrics = lyricInput.value.trim().split('\n');
     lyricsList.value = lyrics.map((line, index) => ({ time: line.match(timeRegex)?.[0] ?? "[99:59.99]", lyrics: line.replace(timeRegex, "").trim(), index }));
 };
 
@@ -53,20 +53,18 @@ function playAtTime(timeValue) {
 // 刪除歌詞行
 function deleteLine(index) {
     lyricsList.value.splice(index, 1);
-    sortLyricsList()
 };
 
 // 根據當前時間插入空行
 function insertEmptyLine() {
     const currentTime = audio.value.currentTime;
     lyricsList.value.push({ time: `[${Math.floor(currentTime / 60).toString().padStart(2, '0')}:${(currentTime % 60).toFixed(2).toString().padStart(5, '0')}]`, lyrics: '', index: lyricsList.value.length });
-    // 重新排序
     sortLyricsList();
 
 };
 
 async function copy() {
-    const text = JSON.stringify(obj.value, null, 4)
+    const text = JSON.stringify(obj, null, 4)
     if (navigator.clipboard) {
         await navigator.clipboard.writeText(text)
             .then((res) => console.log("複製連結成功"))
@@ -84,7 +82,7 @@ function sortLyricsList() {
         const timeBSeconds = parseInt(timeB[1], 10) * 60 + parseFloat(timeB[2]);
         return timeASeconds - timeBSeconds;
     });
-    obj.value.lyric = lyricsList.value.map(x => `${x.time} ${x.lyrics}`).join("\n")
+    lyricInput.value = lyricsList.value.map(x => `${x.time} ${x.lyrics}`).join("\n")
 };
 
 </script>
