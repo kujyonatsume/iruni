@@ -1,17 +1,12 @@
 <script setup>
-
 import { mdiPlay, mdiRewind, mdiFastForward, mdiUpdate, mdiDelete, mdiPlus, mdiContentCopy } from "@mdi/js"
-
+useTitle().set("歌曲打軸");
 const audio = ref(null);
 const lyricsInput = ref("")
 const lyricsList = ref([]);
 
 const timeRegex = /\[(\d+):(\d+\.\d+)\]/
-const obj = {
-    title: "",
-    videoId: "",
-    lyric: ``
-}
+const obj = { title: "", videoId: "", lyric: "" }
 // 音樂上傳功能
 function uploadAudio(event) {
     /** @type {HTMLInputElement} type - description */
