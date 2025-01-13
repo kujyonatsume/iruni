@@ -95,11 +95,14 @@ function sortLyricsList() {
         <v-file-input label="上傳音樂" accept="audio/*,video/*" @change="uploadAudio" />
         <audio :style="{ margin: '2px' }" style="width: 100%;" ref="audio" controls> 您的瀏覽器不支援 audio 標籤</audio>
         
-        <div :style="{ margin: '2px' }">
+        <div style="display: flex;justify-content: space-between; justify-items: center;">
+            <div :style="{ margin: '2px' }">
             <v-btn :style="{ margin: '2px' }" @click="insertEmptyLine"><v-icon>{{ mdiPlus }}</v-icon></v-btn>
             <v-btn :style="{ margin: '2px' }" @click="jump(-3)"><v-icon>{{ mdiRewind }}</v-icon></v-btn>
             <v-btn :style="{ margin: '2px' }" @click="jump(+3)"><v-icon>{{ mdiFastForward }}</v-icon></v-btn>
-            <span>{{ obj.title }}</span>
+        </div>
+        <h3>{{ obj.title }}</h3>
+        <v-btn :disabled= "obj.title == ''" target="_blank" rel="noreferrer" :href="`https://www.bing.com/search?q=${obj.title} 歌詞 kkbox`">搜尋歌詞</v-btn>
         </div>
         <v-textarea v-if="edittxt" :style="{ margin: '2px' }" v-model="obj.lyric" @update:model-value="updateLyrics"
             rows="20" outlined />
