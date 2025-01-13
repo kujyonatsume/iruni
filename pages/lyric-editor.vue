@@ -1,17 +1,26 @@
 <script setup>
 
-import { mdiPlay, mdiRewind, mdiFastForward, mdiUpdate, mdiDelete, mdiPlus } from "@mdi/js"
+import { mdiPlay, mdiRewind, mdiFastForward, mdiUpdate, mdiDelete, mdiPlus, mdiContentCopy } from "@mdi/js"
 
 const audio = ref(null);
 const lyricsInput = ref("")
 const lyricsList = ref([]);
 
 const timeRegex = /\[(\d+):(\d+\.\d+)\]/
-
+const obj = {
+    title: "",
+    videoId: "",
+    lyric: ``
+}
 // 音樂上傳功能
-const uploadAudio = (event) => {
-    const file = event.target.files[0];
+function uploadAudio(event) {
+    /** @type {HTMLInputElement} type - description */
+    const e = event.target
+    const file = e.files[0];
     if (file) {
+        const nameMatch = file.name.match(/(?:\d+-\d+) (.*?) \[(.*?)\]/)
+        obj.title = nameMatch[0]
+        obj.videoId = nameMatch[1]
         const url = URL.createObjectURL(file);
         audio.value.src = url;
         audio.value.play();
@@ -62,6 +71,17 @@ function insertEmptyLine() {
 
 };
 
+async function copy() {
+    obj.lyric = lyricsInput.value
+    const text = JSON.stringify(obj, null, 4)
+    if (navigator.clipboard) {
+        await navigator.clipboard.writeText(text)
+            .then((res) => console.log("複製連結成功"))
+            .catch((rej) => console.log("無法複製連結"));
+    } else window.Clipboard.setData("Text", text);
+
+}
+
 // 排序歌詞列表
 function sortLyricsList() {
     lyricsList.value.sort((a, b) => {
@@ -79,22 +99,27 @@ function sortLyricsList() {
 <template>
     <v-container>
         <v-file-input label="上傳音樂" accept="audio/*,video/*" @change="uploadAudio" />
-        <audio :style="{margin: '2px' }" style="width: 100%;" ref="audio" controls> 您的瀏覽器不支援 audio 標籤</audio>
-        <div :style="{margin: '2px' }">
+        <audio :style="{ margin: '2px' }" style="width: 100%;" ref="audio" controls> 您的瀏覽器不支援 audio 標籤</audio>
+        <div :style="{ margin: '2px' }">
             <div style="display: flex;" v-for="(item, index) in lyricsList" :key="index"
                 @dblclick="playAtTime(item.time)">
-                <v-btn :style="{margin: '2px' }" @click="updateTime(index)" color="primary"><v-icon>{{ mdiUpdate }}</v-icon></v-btn>
-                <input :style="{margin: '2px' }" @change="sortLyricsList" v-model="item.time" style="width: 150px; text-align: center;" />
-                <input :style="{margin: '2px' }" @change="sortLyricsList" v-model="item.lyrics" style="width: 100%;" />
-                <v-btn :style="{margin: '2px' }" @click="deleteLine(index)" color="error"><v-icon>{{ mdiDelete }}</v-icon></v-btn>
+                <v-btn :style="{ margin: '2px' }" @click="updateTime(index)" color="primary"><v-icon>{{ mdiUpdate
+                        }}</v-icon></v-btn>
+                <input :style="{ margin: '2px' }" @change="sortLyricsList" v-model="item.time"
+                    style="width: 150px; text-align: center;" />
+                <input :style="{ margin: '2px' }" @change="sortLyricsList" v-model="item.lyrics" style="width: 100%;" />
+                <v-btn :style="{ margin: '2px' }" @click="deleteLine(index)" color="error"><v-icon>{{ mdiDelete
+                        }}</v-icon></v-btn>
             </div>
         </div>
-        <div :style="{margin: '2px' }">
-            <v-btn :style="{margin: '2px' }" @click="insertEmptyLine"><v-icon>{{ mdiPlus }}</v-icon></v-btn>
-            <v-btn :style="{margin: '2px' }" @click="jump(-3)"><v-icon>{{ mdiRewind }}</v-icon></v-btn>
-            <v-btn :style="{margin: '2px' }" @click="jump(+3)"><v-icon>{{ mdiFastForward }}</v-icon></v-btn>
+        <div :style="{ margin: '2px' }">
+            <v-btn :style="{ margin: '2px' }" @click="insertEmptyLine"><v-icon>{{ mdiPlus }}</v-icon></v-btn>
+            <v-btn :style="{ margin: '2px' }" @click="jump(-3)"><v-icon>{{ mdiRewind }}</v-icon></v-btn>
+            <v-btn :style="{ margin: '2px' }" @click="jump(+3)"><v-icon>{{ mdiFastForward }}</v-icon></v-btn>
+            <v-btn :style="{ margin: '2px' }" @click="copy"><v-icon>{{ mdiContentCopy }}</v-icon></v-btn>
         </div>
-        <v-textarea :style="{margin: '2px' }" v-model="lyricsInput" @update:model-value="updateLyrics" rows="6" outlined />
+        <v-textarea :style="{ margin: '2px' }" v-model="lyricsInput" @update:model-value="updateLyrics" rows="6"
+            outlined />
     </v-container>
 
 </template>
