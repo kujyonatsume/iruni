@@ -24,7 +24,7 @@ function uploadAudio(event) {
 };
 
 // 快進/快退功能
-function jump(seconds) { audio.value.currentTime = Math.max(0, Math.min(audio.value.duration, audio.value.currentTime + seconds)); }
+function jump(seconds) { audio.value.currentTime = Math.max(0, Math.min(audio.value.duration, audio.value.currentTime + seconds)) }
 
 // 載入歌詞到編輯區
 function updateLyrics() {
@@ -33,24 +33,24 @@ function updateLyrics() {
 };
 
 // 點擊「更新時間」按鈕
-function updateTime(index, num) {
-    if (num) {
-        const match = lyricsList.value[index].time.match(timeRegex)
-        num += Number(match[1], 10) * 60 + Number(match[2]);
-        num = Math.max(num, 0)
-    }
-    else num = audio.value.currentTime;
+function setTime(index, num) {
+    num ??= audio.value.currentTime;
     const minutes = `${Math.floor(num / 60)}`;
     const seconds = (num % 60).toFixed(2);
     lyricsList.value[index].time = `[${minutes.padStart(2, '0')}:${seconds.padStart(5, '0')}]`;
     sortLyricsList()
 };
 
+function updateTime(index, num) {
+    const m = lyricsList.value[index].time.match(timeRegex)
+    setTime(index, Math.max(Number(m[1]) * 60 + Number(m[2]) + num, 0))
+};
+
 // 點擊「播放」按鈕
 function playAtTime(timeValue) {
-    const match = timeValue.match(timeRegex);
-    if (match) {
-        audio.value.currentTime = Number(match[1], 10) * 60 + Number(match[2]);
+    const m = timeValue.match(timeRegex);
+    if (m) {
+        audio.value.currentTime = Number(m[1]) * 60 + Number(m[2]);
         audio.value.play();
     }
 };
@@ -58,26 +58,20 @@ function playAtTime(timeValue) {
 // 刪除歌詞行
 function deleteLine(index) {
     lyricsList.value.splice(index, 1);
-    sortLyricsList()
 };
 
 // 根據當前時間插入空行
 function insertEmptyLine() {
     const currentTime = audio.value.currentTime;
     lyricsList.value.push({ time: `[${Math.floor(currentTime / 60).toString().padStart(2, '0')}:${(currentTime % 60).toFixed(2).toString().padStart(5, '0')}]`, lyrics: '', index: lyricsList.value.length });
-    // 重新排序
     sortLyricsList();
 
 };
 
 async function copy() {
     const text = JSON.stringify(obj.value, null, 4)
-    if (navigator.clipboard) {
-        await navigator.clipboard.writeText(text)
-            .then((res) => console.log("複製連結成功"))
-            .catch((rej) => console.log("無法複製連結"));
-    } else window.Clipboard.setData("Text", text);
-
+    if (navigator.clipboard) await navigator.clipboard.writeText(text)
+    else window.Clipboard.setData("Text", text);
 }
 
 // 排序歌詞列表
@@ -114,18 +108,18 @@ function sortLyricsList() {
         <div v-else class="lyrics-container">
             <div style="display: flex;" v-for="(item, index) in lyricsList" :key="index"
                 @dblclick="playAtTime(item.time)">
-                <v-btn :style="{ margin: '2px' }" @click="() => updateTime(index, 0)" color="primary"><v-icon>{{
-                        mdiUpdate }}</v-icon></v-btn>
+                <v-btn :style="{ margin: '2px' }" @click="setTime(index, undefined)" color="primary"><v-icon>{{
+                    mdiUpdate }}</v-icon></v-btn>
                 <div style="display: flex;justify-content: left;">
                     <input :style="{ margin: '2px' }" @change="sortLyricsList" v-model="item.time"
                         style="width: 100px; text-align: center;" />
                     <div :style="{ margin: '2px', width: '50px' }"
                         style="display: flex; flex-direction: column; align-content: center;">
                         <v-btn :min-width="'50px'" :style="{ height: '50%', width: '50px' }"
-                            @click="() => updateTime(index, +0.5)" color="primary"><v-icon>{{ mdiMenuUp
+                            @click="updateTime(index, +0.5)" color="primary"><v-icon>{{ mdiMenuUp
                                 }}</v-icon></v-btn>
                         <v-btn :min-width="'50px'" :style="{ height: '50%', width: '50px' }"
-                            @click="() => updateTime(index, -0.5)" color="primary"><v-icon>{{ mdiMenuDown
+                            @click="updateTime(index, -0.5)" color="primary"><v-icon>{{ mdiMenuDown
                                 }}</v-icon></v-btn>
                     </div>
                 </div>
