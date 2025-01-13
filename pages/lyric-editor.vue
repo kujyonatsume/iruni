@@ -6,7 +6,7 @@ const audio = ref();
 const edittxt = ref(true);
 const lyricsList = ref([]);
 
-const timeRegex = /\[?(\d+):(\d+\.\d+)\]?/
+const timeRegex = /\[(\d+):(\d+\.\d+)\]/
 const obj = ref({ title: "", videoId: "", lyric: "" })
 // 音樂上傳功能
 function uploadAudio(event) {
