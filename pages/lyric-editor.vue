@@ -19,8 +19,8 @@ function uploadAudio(event) {
     const file = e.files[0];
     if (file) {
         const nameMatch = file.name.match(/(?:\d+-\d+) (.*?) \[(.*?)\]/)
-        obj.title = nameMatch[0]
-        obj.videoId = nameMatch[1]
+        obj.title = nameMatch[1]
+        obj.videoId = nameMatch[2]
         const url = URL.createObjectURL(file);
         audio.value.src = url;
         audio.value.play();
