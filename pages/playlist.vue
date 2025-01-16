@@ -149,20 +149,10 @@ function selectSong(id) {
   player.loadVideoById(nextSong(id))
 }
 
-// 自動滾動歌詞
+// 設置自動滾動歌詞位置
 function updateLyricsScroll() {
-  const matchedLine = playlists[current.value].lyric.findIndex(line => line.time > currentTime.value) - 1
-  if (matchedLine >= 0) {
-    // 計算當前行的偏移量
-    if (lyricsRef.value) {
-      const scrollPosition = (matchedLine - 1) * lineHeight
-      // 設置滾動位置
-      for (let i = 0; i < lyricsRef.value.children.length; i++) {
-        const element = lyricsRef.value.children.item(i)
-        element.style.top = `-${scrollPosition}px`
-      }
-    }
-  }
+  const scrollPosition = Math.min(2 - playlists[current.value].lyric.findIndex(line => line.time > currentTime.value), 0) * lineHeight
+  for (const e of lyricsRef.value.children) e.style.top = `${scrollPosition}px`
 }
 
 onMounted(() => {
@@ -186,11 +176,8 @@ onMounted(() => {
       <div id="player"></div>
 
       <ul class="lyrics-container" ref="lyricsRef">
-        <li v-for="(line, index) in playlists[current].lyric" :key="index"
-          :class="{ active: currentTime >= line.time && currentTime < (playlists[current].lyric[index + 1]?.time || Infinity) }"
-          class="lyric-line" :style="{ position: 'relative', top: `${(index - matchedLine) * lineHeight}px` }">
-          {{ line.text }}
-        </li>
+        <li v-for="(line, index) in playlists[current].lyric" :key="index" :style="{ position: 'relative' }"
+          :class="{ 'lyric-line': true, active: currentTime >= line.time && currentTime < (playlists[current].lyric[index + 1]?.time || Infinity) }"> {{ line.text }} </li>
       </ul>
     </div>
     <div class="title-container">
