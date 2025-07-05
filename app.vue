@@ -22,7 +22,7 @@ const title = useTitle()
 const pages = [
   { icon: apps, title: "首頁", to: "/" },
   { icon: playlist, title: "歌曲清單", to: "/playlist" },
-  { icon: playBox, title: "音效按鈕", to: "/button" },
+  { icon: playBox, title: "音效按鈕", to: "https://iruni-button.natsumes.cc/" },
 ]
 
 const links = [
