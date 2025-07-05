@@ -1,6 +1,6 @@
 <script setup>
 
-import { mdiPlay, mdiRewind, mdiFastForward, mdiUpdate, mdiDelete, mdiPlus } from "@mdi/js"
+import { mdiRewind, mdiFastForward, mdiUpdate, mdiDelete, mdiPlus } from "@mdi/js"
 
 const audio = ref(null);
 const lyricsInput = ref("")
